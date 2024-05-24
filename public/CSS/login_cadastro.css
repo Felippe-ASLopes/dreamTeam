@@ -3,6 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
 }
 
 @font-face {
@@ -16,6 +17,7 @@ main {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    filter: blur(0px);
 }
 
 #mensagem_login {
@@ -29,6 +31,7 @@ main {
     gap: 3vh;
     font-family: gliker;
     color: #ffffff;
+    border-radius: 20px 0px 0px 20px;
 }
 
 #logo {
@@ -41,6 +44,7 @@ main {
     width: 60%;
     height: 100%;
     display: flex;
+    border-radius: 0px 20px 20px 0px;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;

@@ -1,0 +1,133 @@
+body {
+    background-color: #0d0e0e;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: gliker;
+    src: url(../assets/Gliker-Regular.ttf);
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    font-family: gliker;
+}
+
+aside {
+    width: 23vw;
+    height: 90vh;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+}
+
+/* PARTE ESQUERDA, INFO DO USUARIO */
+#info_user {
+    width: 100%;
+    height: 17.9%;
+    border: solid black;
+    display: flex;
+}
+
+.div_jogador {
+    width: 100%;
+    height: 15%;
+    border: solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+/* PARTE DO MEIO, QUADRA */
+#div_quadra {
+    width: 51vw;
+    height: 90vh;
+    display: flex;
+    background-image: url(../assets/img/quadraBasquete.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+.add_jogador {
+    width: 5vw;
+    height: 10vh;
+    background-color: #00000085;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.icon_plus {
+    width: 80%;
+    height: 80%;
+}
+
+#div_jogador1 {
+    position: relative;
+    left: 45%;
+    top: 81%;
+}
+
+#div_jogador2 {
+    position: relative;
+    top: 66%;
+}
+
+#div_jogador3 {
+    position: relative;
+    left: 68%;
+    top: 56%;
+}
+
+#div_jogador4 {
+    position: relative;
+    top: 25%;
+    right: 8%;
+}
+
+#div_jogador5 {
+    position: relative;
+    top: 35%;
+    left: 32%;
+}
+
+#div_jogador1:hover {
+    transform: scale(1.3);
+    background-color: #0a0a0a;
+}
+
+#div_jogador2:hover {
+    transform: scale(1.3);
+    background-color: #0a0a0a;
+}
+
+#div_jogador3:hover {
+    transform: scale(1.3);
+    background-color: #0a0a0a;
+}
+
+#div_jogador4:hover {
+    transform: scale(1.3);
+    background-color: #0a0a0a;
+}
+
+#div_jogador5:hover {
+    transform: scale(1.3);
+    background-color: #0a0a0a;
+    
+}
+/* PARTE DA DIREITA, MERCADO
+USAR OVERFLOW*/
