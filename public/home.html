@@ -8,7 +8,48 @@
 </head>
 
 <body>
-    <main>
+    <!-- TELA DE LOGIN/CADASTRO -->
+    <!-- <div id="container_login_cadastro">
+        <div id="mensagem_login">
+            <img src="./assets/img/icon.png" id="logo">
+            <h1>Seja bem-vindo de volta</h1>
+        </div>
+        <div id="index_login">
+            <div id="container_seletor">
+                <div id="login" onclick="mostrarLogin()">
+                    <span id="span_login">Login</span>
+                </div>
+                <div id="cadastro" onclick="mostrarCadastro()">
+                    <span id="span_cadastro">Crie uma conta</span>
+                </div>
+            </div>
+            <div id="container_login">
+                <p>Email:</p>
+                <input type="text" id="input_login_email" class="input_formulario">
+                <p>Senha:</p>
+                <input type="password" id="input_login_senha" class="input_formulario">
+                <div id="div_botao">
+                    <button onclick="login()" id="login_button">Entrar</button>
+                </div>
+            </div>
+            <div id="container_cadastro" class="oculto">
+                <p>Nome do time:</p>
+                <input type="text" id="input_cadastro_username" class="input_formulario">
+                <p>Email:</p>
+                <input type="text" id="input_cadastro_email" class="input_formulario">
+                <p>Senha:</p>
+                <input type="password" id="input_cadastro_senha" class="input_formulario">
+                <div id="div_botao">
+                    <button onclick="cadastro()" id="login_button">Criar conta</button>
+                </div>
+            </div>
+        </div>
+        <div id="mensagem_cadastro"></div>
+    </div> -->
+
+    <!-- MONTAGEM DE TIME -->
+    <!-- PARTE DA ESQUERDA, INFO DO USER -->
+    <main id="main_time">
         <aside id="aside_user">
             <div id="info_user">
                 <p>Nome do time: Teste |</p>
@@ -32,6 +73,8 @@
                 <p>adicione um foward</p>
             </div>
         </aside>
+
+        <!-- PARTE DO MEIO, QUADRA -->
         <div id="div_quadra">
             <div id="div_jogador1" class="add_jogador">
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
@@ -49,13 +92,45 @@
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
             </div>
         </div>
+
+        <!-- PARTE DA DIREITA, MERCADO -->
         <aside id="aside_mercado">
-            <h1>mercado de jogadores</h1>
+            <div id="titulo_mercado">                
+                <h1>mercado de jogadores</h1>
+            </div>
         </aside>
     </main>
 </body>
 </html>
 
+<!-- JS PARA TELA DE LOGIN E CADASTRO -->
 <script>
-    
+    let formularioLogin = document.querySelector('#container_login')
+    let formularioCadastro = document.querySelector('#container_cadastro')
+    let mainTime = document.querySelector('#main_time')
+
+    function mostrarLogin() {
+        mainTime.classList.add('blur')
+        formularioLogin.classList.remove('oculto')
+        formularioCadastro.classList.add('oculto')
+        span_login.style.fontSize = '2.5vw'
+        span_cadastro.style.fontSize = '2vw'
+    }
+
+    function mostrarCadastro() {
+        mainTime.classList.add('blur')
+        formularioLogin.classList.add('oculto')
+        formularioCadastro.classList.remove('oculto')
+        span_login.style.fontSize = '2vw'
+        span_cadastro.style.fontSize = '2.3vw'
+        document.title = 'cadastro teste'
+    }
+
+    function login() {
+        mainTime.classList.remove('blur')
+        container_login_cadastro.style.display = 'none'
+    }
 </script>
+
+<!-- JS PARA MONTAGEM DE TIME -->
+<script src="./js/funcTimeUser.js"></script>

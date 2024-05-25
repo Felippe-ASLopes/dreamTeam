@@ -2,6 +2,10 @@ body {
     background-color: #0d0e0e;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @font-face {
@@ -9,6 +13,140 @@ body {
     src: url(../assets/Gliker-Regular.ttf);
 }
 
+.oculto {
+    display: none !important;
+}
+
+.blur {
+    filter: blur(5px);
+}
+
+/* TELA DE LOGIN/CADASTRO */
+#container_login_cadastro {
+    width: 60vw;
+    height: 70vh;
+    display: flex;
+    position: absolute;
+    z-index: 2;
+}
+
+#mensagem_login {
+    width: 40%;
+    height: 100%;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 3vh;
+    font-family: gliker;
+    color: #ffffff;
+    border-radius: 20px 0px 0px 20px;
+}
+
+#logo {
+    width: 10vw;
+    height: 15vh;
+    margin-top: 1vh;
+}
+
+#index_login {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    border-radius: 0px 20px 20px 0px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    font-family: gliker;
+    color: #ffffff;
+    background-color: black;
+}
+
+#container_seletor {
+    width: 70%;
+    height: 10%;
+    margin: 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#login {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#login > span, #cadastro span {
+    font-size: 2vw;
+    font-weight: 100;
+    transition: 0.25s;
+}
+
+#cadastro {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1vw;
+    transition: 0.25s;
+}
+
+#container_login {
+    width: 90%;
+    height: 90%;
+    margin: 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.input_formulario {
+    width: 90%;
+    height: 10%;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #ffffff;
+    border-radius: 2px;
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+#div_botao {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login_button {
+    width: 10vw;
+    height: 5vh;
+    border-radius: 5px;
+    font-family: gliker;
+    font-size: 1.5em;
+}
+
+#container_cadastro {
+    width: 90%;
+    height: 90%;
+    margin: 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+/* MONTAGEM DE TIME */
 main {
     width: 100vw;
     height: 100vh;
@@ -68,6 +206,8 @@ aside {
     align-items: center;
     cursor: pointer;
     transition: 0.25s;
+    position: relative;
+    z-index: 1;
 }
 
 .icon_plus {
@@ -76,30 +216,25 @@ aside {
 }
 
 #div_jogador1 {
-    position: relative;
     left: 45%;
     top: 81%;
 }
 
 #div_jogador2 {
-    position: relative;
     top: 66%;
 }
 
 #div_jogador3 {
-    position: relative;
     left: 68%;
     top: 56%;
 }
 
 #div_jogador4 {
-    position: relative;
     top: 25%;
     right: 8%;
 }
 
 #div_jogador5 {
-    position: relative;
     top: 35%;
     left: 32%;
 }
