@@ -161,12 +161,14 @@ main {
 aside {
     width: 23vw;
     height: 90vh;
-    background-color: white;
+    background-color: #0077C0;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     gap: 0.5vh;
+    color: #ffffff;
 }
+
 
 /* PARTE ESQUERDA, INFO DO USUARIO */
 #info_user {
@@ -215,54 +217,37 @@ aside {
     height: 80%;
 }
 
-#div_jogador1 {
+#div_jogador0 {
     left: 45%;
     top: 81%;
 }
 
-#div_jogador2 {
+#div_jogador1 {
     top: 66%;
 }
 
-#div_jogador3 {
+#div_jogador2 {
     left: 68%;
     top: 56%;
 }
 
-#div_jogador4 {
+#div_jogador3 {
     top: 25%;
     right: 8%;
 }
 
-#div_jogador5 {
+#div_jogador4 {
     top: 35%;
     left: 32%;
 }
 
-#div_jogador1:hover {
-    transform: scale(1.3);
-    background-color: #0a0a0a;
-}
-
-#div_jogador2:hover {
-    transform: scale(1.3);
-    background-color: #0a0a0a;
-}
-
-#div_jogador3:hover {
-    transform: scale(1.3);
-    background-color: #0a0a0a;
-}
-
+#div_jogador0:hover,
+#div_jogador1:hover,
+#div_jogador2:hover,
+#div_jogador3:hover,
 #div_jogador4:hover {
     transform: scale(1.3);
     background-color: #0a0a0a;
-}
-
-#div_jogador5:hover {
-    transform: scale(1.3);
-    background-color: #0a0a0a;
-    
 }
 /* PARTE DA DIREITA, MERCADO
 USAR OVERFLOW*/

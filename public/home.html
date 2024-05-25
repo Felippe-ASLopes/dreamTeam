@@ -56,26 +56,13 @@
                 <p>dinheiro: $70 |</p>
                 <p>valor do time: $30</p>
             </div>
-            <div id="jogador1" class="div_jogador">
-                <p>adicine um guard</p>
-            </div>
-            <div id="jogador2" class="div_jogador">
-                <p>adicine um guard</p>
-            </div>
-            <div id="jogador3" class="div_jogador">
-                <p>Lebron James</p>
-                <p>valor: $30</p>
-            </div>
-            <div id="jogador4" class="div_jogador">
-                <p>adicione um foward</p>
-            </div>
-            <div id="jogador5" class="div_jogador">
-                <p>adicione um foward</p>
-            </div>
         </aside>
 
         <!-- PARTE DO MEIO, QUADRA -->
         <div id="div_quadra">
+            <div id="div_jogador0" class="add_jogador">
+                <img src="./assets/img/icon_plus.png" class="icon_plus">
+            </div>
             <div id="div_jogador1" class="add_jogador">
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
             </div>
@@ -86,9 +73,6 @@
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
             </div>
             <div id="div_jogador4" class="add_jogador">
-                <img src="./assets/img/icon_plus.png" class="icon_plus">
-            </div>
-            <div id="div_jogador5" class="add_jogador">
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
             </div>
         </div>
@@ -132,5 +116,11 @@
     }
 </script>
 
+<!-- JS PARA SUBSTITUIR CSS -->
+<script>
+    let divJogador = document.querySelector('#div_jogador0')
+</script>
+
 <!-- JS PARA MONTAGEM DE TIME -->
 <script src="./js/funcTimeUser.js"></script>
+<script src="./js/funcMercadoJogadores.js"></script>
