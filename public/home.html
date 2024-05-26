@@ -56,46 +56,82 @@
                     <span>Nome do time: Teste</span>
                 </div>
                 <div id="div_dinheiro_time">
-                    <div id="dinheiro_total" class="div_valor">
-                        <span>dinheiro: $70</span>
+                    <div class="div_valor">
+                        <span>Dinheiro restante:</span>
+                        <span id="dinheiro_total">$ 70</span>
                     </div>
-                    <div id="valorTime" class="div_valor">
-                        <span>valor do time: $30</span>
+                    <div class="div_valor">
+                        <span>Valor do time:</span>
+                        <span id="valor_time">$ 30</span>
                     </div>
                 </div>
             </div>
+            <div id="jogador0" class="div_jogador">
+                <span>Adicione um Guard</span>
+            </div>
+            <div id="jogador1" class="div_jogador">
+                <span>Adicione um Guard</span>
+            </div>
+            <div id="jogador2" class="div_jogador">
+                <span>Adicione um Guard ou Foward</span>
+            </div>
+            <div id="jogador3" class="div_jogador">
+                <span>Adicione um Foward</span>
+            </div>
+            <div id="jogador4" class="div_jogador">
+                <span>Adicione um Foward</span>
         </aside>
 
         <!-- PARTE DO MEIO, QUADRA -->
         <div id="div_quadra">
-            <div id="div_jogador0" class="add_jogador">
-                <img src="./assets/img/icon_plus.png" class="icon_plus">
+            <!-- JOGADOR 0 -->
+            <div id="div_jogador0" class="add_jogador" dropzone="">
+                <div id="div_img_jogador0" class="div_img_jogador_add">
+                    <img id="img_jogador0" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador0" class="nome_jogador">PG</span>
             </div>
+            <!-- JOGADOR 1 -->
             <div id="div_jogador1" class="add_jogador">
-                <img src="./assets/img/icon_plus.png" class="icon_plus">
+                <div id="div_img_jogador1" class="div_img_jogador_add">
+                    <img id="img_jogador1" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador1" class="nome_jogador">SG</span>
             </div>
+            <!-- JOGADOR 2 -->
             <div id="div_jogador2" class="add_jogador">
-                <img src="./assets/img/icon_plus.png" class="icon_plus">
+                <div id="div_img_jogador2" class="div_img_jogador_add">
+                    <img id="img_jogador2" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador2" class="nome_jogador">SF</span>
             </div>
+            <!-- JOGADOR 3 -->
             <div id="div_jogador3" class="add_jogador">
                 <div id="div_img_jogador3" class="div_img_jogador_add">
-                    <img src="./assets/imgJogador/lebronJames.png" class="ajustar_foto_jogador">
+                    <img id="img_jogador3" src="./assets/imgJogador/lebronJames.png" class="ajustar_foto_jogador">
                 </div>
-                <span id="span_nome_jogador_add" class="nome_jogador">Lebron James</span>
+                <span id="span_nome_jogador3" class="nome_jogador">Lebron James</span>
             </div>
+            <!-- JOGADOR 4 -->
             <div id="div_jogador4" class="add_jogador">
-                <img src="./assets/img/icon_plus.png" class="icon_plus">
+                <div id="div_img_jogador4" class="div_img_jogador_add">
+                    <img id="img_jogador4" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador4" class="nome_jogador">C</span>
             </div>
         </div>
 
         <!-- PARTE DA DIREITA, MERCADO -->
         <aside id="aside_mercado">
-            <div id="titulo_mercado">                
+            <div id="titulo_mercado">
                 <span>Mercado de jogadores</span>
+            </div>
+            <div id="container_jogadores_mercado">
             </div>
         </aside>
     </main>
 </body>
+
 </html>
 
 <!-- JS PARA TELA DE LOGIN E CADASTRO -->
@@ -128,8 +164,10 @@
 </script>
 
 <!-- JS PARA MONTAGEM DE TIME -->
-<script src="./js/funcTimeUser.js"></script>
 <script src="./js/funcMercadoJogadores.js"></script>
+<script src="./js/funcTimeUser.js"></script>
 
 <!-- JS PARA SUBSTITUIR CSS -->
 <script src="./js/efeitosCSS.js"></script>
+
+<!-- <body onload=""> -->

@@ -1,16 +1,107 @@
-for (i = 0; i < 5; i++) {
-    let posicao = 'Guard'
+const timeUser = ['', '', '', '', '']
 
-    if (i == 2) {
-        posicao = 'Guard ou Forward'
-    }
+function addJogador(e) {
+    // CAPTURA O ID DO ELEMENTO CLICADO
+    const elemento = event.target.closest('.background_add');
+    const idJogadorAdd = elemento.id;
 
-    if (i == 3 || i == 4) {
-        posicao = 'Forward'
+    const posicaoJogadorAdd = listaPosicaoJogadores[idJogadorAdd]
+
+    if (posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') {
+        for (let i = 0; i <= 2; i++) {
+            if (timeUser[i] == '') {
+                const divAlterarTime = document.getElementById(`jogador${i}`)
+
+                divAlterarTime.innerHTML = `
+                <div class="div_img_jogador">
+                    <img src="${listaFotoJogadores[idJogadorAdd]}" class="img_jogador">
+                </div>
+                <div class="container_info_jogador">
+                    <div class="div_nome_jogador">
+                        <span>${listaJogadores[idJogadorAdd]}</span>
+                    </div>
+                    <div class="div_valor_add">
+                        <div class="div_info_jogador">
+                            <span>Posicao:</span>
+                            <span>${posicaoJogadorAdd}</span>
+                        </div>
+                        <div class="div_info_jogador">
+                            <span>Valor:</span>
+                            <span>$ ${listaValorJogadores[idJogadorAdd]}</span>
+                        </div>
+                        <div class="div_info_jogador">
+                            <div class="background_remove">
+                                <img src="./assets/img/icon_minus.png" class="icon_minus">
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+
+                // ADD NO CAMPO
+                const imgAlterar = document.getElementById(`img_jogador${i}`)
+                imgAlterar.src = listaFotoJogadores[idJogadorAdd]
+                imgAlterar.classList.remove('icon_plus')
+                imgAlterar.classList.add('ajustar_foto_jogador')
+
+                const spanAlterar = document.getElementById(`span_nome_jogador${i}`)
+                spanAlterar.innerHTML = listaJogadores[idJogadorAdd]
+
+
+                // ADD NO TIMEUSER, PARTE DIREITA
+                const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
+
+                divAlterarMercado.style.display = 'none'
+                break
+            }
+        }
     }
-    
-    aside_user.innerHTML += `
-    <div id="jogador${i}" class="div_jogador">
-        <p>Adicione um ${posicao}</p>
-    </div>`
+    else if (posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') {
+        for (let i = 2; i <= 4; i++) {
+            if (timeUser[i] == '') {
+                const divAlterar = document.getElementById(`jogador${i}`)
+
+                divAlterar.innerHTML = `
+                <div class="div_img_jogador">
+                    <img src="${listaFotoJogadores[idJogadorAdd]}" class="img_jogador">
+                </div>
+                <div class="container_info_jogador">
+                    <div class="div_nome_jogador">
+                        <span>${listaJogadores[idJogadorAdd]}</span>
+                    </div>
+                    <div class="div_valor_add">
+                        <div class="div_info_jogador">
+                            <span>Posicao:</span>
+                            <span>${posicaoJogadorAdd}</span>
+                        </div>
+                        <div class="div_info_jogador">
+                            <span>Valor:</span>
+                            <span>$ ${listaValorJogadores[idJogadorAdd]}</span>
+                        </div>
+                        <div class="div_info_jogador">
+                            <div class="background_remove">
+                                <img src="./assets/img/icon_minus.png" class="icon_minus">
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+
+                // ADD NO CAMPO
+                const imgAlterar = document.getElementById(`img_jogador${i}`)
+                imgAlterar.src = listaFotoJogadores[idJogadorAdd]
+                imgAlterar.classList.remove('icon_plus')
+                imgAlterar.classList.add('ajustar_foto_jogador')
+
+                const spanAlterar = document.getElementById(`span_nome_jogador${i}`)
+                spanAlterar.innerHTML = listaJogadores[idJogadorAdd]
+
+
+                // ADD NO TIMEUSER, PARTE DIREITA
+                const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
+
+                divAlterarMercado.style.display = 'none'
+
+                break
+            }
+        }
+    }
 }
