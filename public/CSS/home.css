@@ -165,25 +165,61 @@ aside {
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 0.5vh;
+    justify-content: flex-start;
+    align-items: center;
     color: #ffffff;
 }
-
 
 /* PARTE ESQUERDA, INFO DO USUARIO */
 #info_user {
     width: 100%;
-    height: 17.9%;
-    border: solid black;
+    height: 20.3%;
+    border-bottom: solid #0000004b;
     display: flex;
+    flex-direction: column;
+}
+
+#div_nome_time {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3vw;
+    font-weight: 100;
+    word-break: break-all;
+}
+
+#div_dinheiro_time {
+    width: 100%;
+    height: 60%;
+    display: flex;
+}
+
+.div_valor {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .div_jogador {
     width: 100%;
-    height: 15%;
-    border: solid black;
+    height: 15.5%;
+    border-bottom: solid #0000004b;
     display: flex;
     flex-direction: row;
+    transition: 0.25s;
+}
+
+.jogador_hover {
+    background-color: #1D428A;
+    box-shadow: inset;
+}
+
+#jogador4 {
+    border-radius: 0px 0px 20px 20px !important;
 }
 
 /* PARTE DO MEIO, QUADRA */
@@ -200,16 +236,26 @@ aside {
 
 .add_jogador {
     width: 5vw;
-    height: 10vh;
-    background-color: #00000085;
-    border-radius: 50%;
+    height: 15vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: 0.25s;
     position: relative;
     z-index: 1;
+    border: solid red;
+}
+
+.div_img_jogador_add {
+    width: 5vw;
+    height: 10vh;
+    background-color: #00000085;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon_plus {
@@ -232,22 +278,84 @@ aside {
 }
 
 #div_jogador3 {
-    top: 25%;
-    right: 8%;
+    top: 35%;
+    left: 41.7%;
 }
 
 #div_jogador4 {
-    top: 35%;
-    left: 32%;
+    top: 25%;
+    right: 28%;
 }
 
-#div_jogador0:hover,
-#div_jogador1:hover,
-#div_jogador2:hover,
-#div_jogador3:hover,
-#div_jogador4:hover {
+.add_jogador:hover {
     transform: scale(1.3);
-    background-color: #0a0a0a;
 }
+
+.add_jogador_hover {
+    background-color: #0a0a0a;
+    transform: scale(1.3);
+}
+
+.nome_jogador {
+    width: 10vw;
+    height: 2.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000085;
+    transition: 0.25s;
+    color: #ffffff;
+    font-size: 1vw;
+    font-weight: 100;
+}
+
+.ajustar_foto_jogador {
+    width: 5vw;
+    height: 10vh;
+    border-radius: 50%;
+}
+
 /* PARTE DA DIREITA, MERCADO
 USAR OVERFLOW*/
+#titulo_mercado {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8vw;
+    font-weight: 100;
+}
+
+.div_jogador_mercado {
+    width: 100%;
+    height: 15.5%;
+    display: flex;
+    border-bottom: solid #0000004b;
+    flex-direction: row;
+    transition: 0.25s;
+}
+
+.div_img_jogador {
+    width: 10vw;
+    height: 100%;
+}
+
+.div_jogador_mercado:hover {
+    background-color: #1D428A;
+}
+
+.img_jogador {
+    width: 100%;
+    height: 100%;
+}
+
+/* EFEITO DRAGGING */
+.dragging {
+    width: 10vw !important;
+    height: 15vh !important;
+}
+
+.dragging > .div_info_jogador {
+    display: none !important;
+}

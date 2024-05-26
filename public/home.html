@@ -52,9 +52,17 @@
     <main id="main_time">
         <aside id="aside_user">
             <div id="info_user">
-                <p>Nome do time: Teste |</p>
-                <p>dinheiro: $70 |</p>
-                <p>valor do time: $30</p>
+                <div id="div_nome_time">
+                    <span>Nome do time: Teste</span>
+                </div>
+                <div id="div_dinheiro_time">
+                    <div id="dinheiro_total" class="div_valor">
+                        <span>dinheiro: $70</span>
+                    </div>
+                    <div id="valorTime" class="div_valor">
+                        <span>valor do time: $30</span>
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -70,7 +78,10 @@
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
             </div>
             <div id="div_jogador3" class="add_jogador">
-                <img src="./assets/img/icon_plus.png" class="icon_plus">
+                <div id="div_img_jogador3" class="div_img_jogador_add">
+                    <img src="./assets/imgJogador/lebronJames.png" class="ajustar_foto_jogador">
+                </div>
+                <span id="span_nome_jogador_add" class="nome_jogador">Lebron James</span>
             </div>
             <div id="div_jogador4" class="add_jogador">
                 <img src="./assets/img/icon_plus.png" class="icon_plus">
@@ -80,7 +91,7 @@
         <!-- PARTE DA DIREITA, MERCADO -->
         <aside id="aside_mercado">
             <div id="titulo_mercado">                
-                <h1>mercado de jogadores</h1>
+                <span>Mercado de jogadores</span>
             </div>
         </aside>
     </main>
@@ -116,11 +127,9 @@
     }
 </script>
 
-<!-- JS PARA SUBSTITUIR CSS -->
-<script>
-    let divJogador = document.querySelector('#div_jogador0')
-</script>
-
 <!-- JS PARA MONTAGEM DE TIME -->
 <script src="./js/funcTimeUser.js"></script>
 <script src="./js/funcMercadoJogadores.js"></script>
+
+<!-- JS PARA SUBSTITUIR CSS -->
+<script src="./js/efeitosCSS.js"></script>
