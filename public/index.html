@@ -1,210 +1,178 @@
 <html>
 
 <head>
-    <title>Dream Team</title>
+    <title>Dream Team - Monte seu time</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/home.css">
     <link rel="shortcut icon" href="./assets/img/icon.png">
 </head>
 
 <body>
-    <header id="header">
-        <div id="div_logo">
-            <img src="./assets/img/logo.png" id="logo">
+    <!-- TELA DE LOGIN/CADASTRO -->
+    <div id="container_login_cadastro">
+        <div id="mensagem_login">
+            <img src="./assets/img/icon.png" id="logo">
+            <h1>Seja bem-vindo de volta</h1>
         </div>
-        <div id="navBar">
-            <a href="#main_tutorial">
-                <div class="div_button">
-                    <span class="text">Como Jogar?</span>
+        <div id="index_login">
+            <div id="container_seletor">
+                <div id="login" onclick="mostrarLogin()">
+                    <span id="span_login">Login</span>
                 </div>
-            </a>
-            <a href="#main_sobre">
-                <div class="div_button">
-                    <span class="text">Sobre Nós</span>
-                </div>
-            </a>
-            <a href="">
-                <div class="div_button">
-                    <span class="text">Raking</span>
-                </div>
-            </a>
-            <a href="">
-                <div class="div_button">
-                    <span class="text">Cadastro</span>
-                </div>
-            </a>
-            <a href="">
-                <div class="div_button">
-                    <span class="text">Login</span>
-                </div>
-            </a>
-        </div>
-    </header>
-
-    <main id="main_video">
-        <video src="./assets/video_background.mp4" autoplay muted loop></video>
-        <div id="div_slogan">
-            <span id="slogan_sombra">Já sonhou em criar um time imbatível?</span>
-            <span id="slogan">Já sonhou em criar um time imbatível?</span>
-            <a href="">
-                <div id="div_slogan_button">
-                    <span id="slogan_button">Monte seu time!</span>
-                </div>
-            </a>
-        </div>
-    </main>
-
-    <main id="main_cards">
-        <div id="container_card">
-            <div class="div_card" id="card_amigos">
-                <div id="text_amigos" class="card_text">
-                    <span>Dispute com seus amigos</span>
+                <div id="cadastro" onclick="mostrarCadastro()">
+                    <span id="span_cadastro">Crie uma conta</span>
                 </div>
             </div>
-            <div class="div_card" id="card_allStars">
-                <div id="text_allStars" class="card_text">
-                    <span>Monte um time de All Stars</span>
+            <div id="container_login">
+                <p>Email:</p>
+                <input type="text" id="input_login_email" class="input_formulario">
+                <p>Senha:</p>
+                <input type="password" id="input_login_senha" class="input_formulario">
+                <div id="div_botao">
+                    <button onclick="login()" class="login_button">Entrar</button>
                 </div>
             </div>
-            <div class="div_card" id="card_pontos">
-                <div id="text_pontos" class="card_text">
-                    <span>Entre para o Hall of Fame</span>
+            <div id="container_cadastro" class="oculto">
+                <p>Nome do time:</p>
+                <input type="text" id="input_cadastro_username" class="input_formulario">
+                <p>Email:</p>
+                <input type="text" id="input_cadastro_email" class="input_formulario">
+                <p>Senha:</p>
+                <input type="password" id="input_cadastro_senha" class="input_formulario">
+                <p>Confirme sua senha:</p>
+                <input type="password" id="input_confirmacao_senha" class="input_formulario">
+                <div id="div_botao">
+                    <button onclick="cadastrar()" class="login_button">Criar conta</button>
                 </div>
             </div>
         </div>
-    </main>
+        <div id="mensagem_cadastro"></div>
+    </div>
 
-    <main id="main_tutorial">
-        <h1>Como Jogar?</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus similique dolorem totam fugit, repellat
-            praesentium, nobis explicabo eaque nemo maiores deserunt neque consequuntur libero eligendi facere est
-            molestiae incidunt modi.</p>
-    </main>
+    <!-- MONTAGEM DE TIME -->
+    <!-- PARTE DA ESQUERDA, INFO DO USER -->
+    <main id="main_time">
+        <aside id="aside_user">
+            <div id="info_user">
+                <div id="div_nome_time">
+                    <span>Nome do time: Teste</span>
+                </div>
+                <div id="div_dinheiro_time">
+                    <div class="div_valor">
+                        <span>Dinheiro restante:</span>
+                        <span id="dinheiro_total">$ 70</span>
+                    </div>
+                    <div class="div_valor">
+                        <span>Valor do time:</span>
+                        <span id="valor_time">$ 30</span>
+                    </div>
+                </div>
+            </div>
+            <div id="jogador0" class="div_jogador">
+                <span>Adicione um Guard</span>
+            </div>
+            <div id="jogador1" class="div_jogador">
+                <span>Adicione um Guard</span>
+            </div>
+            <div id="jogador2" class="div_jogador">
+                <span>Adicione um Guard ou Foward</span>
+            </div>
+            <div id="jogador3" class="div_jogador">
+                <span>Adicione um Foward</span>
+            </div>
+            <div id="jogador4" class="div_jogador">
+                <span>Adicione um Foward</span>
+        </aside>
 
-    <main id="main_sobre">
-        <div id="div_text">
-            <h1>Sobre Nós</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, corporis itaque. Rerum excepturi
-                sapiente dolorem? Dolores cupiditate, excepturi placeat nisi beatae ipsum molestiae aliquam,
-                voluptatibus illum facilis, aliquid accusantium qui.
-            </p>
+        <!-- PARTE DO MEIO, QUADRA -->
+        <div id="div_quadra">
+            <!-- JOGADOR 0 -->
+            <div id="div_jogador0" class="add_jogador" dropzone="">
+                <div id="div_img_jogador0" class="div_img_jogador_add">
+                    <img id="img_jogador0" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador0" class="nome_jogador">PG</span>
+            </div>
+            <!-- JOGADOR 1 -->
+            <div id="div_jogador1" class="add_jogador">
+                <div id="div_img_jogador1" class="div_img_jogador_add">
+                    <img id="img_jogador1" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador1" class="nome_jogador">SG</span>
+            </div>
+            <!-- JOGADOR 2 -->
+            <div id="div_jogador2" class="add_jogador">
+                <div id="div_img_jogador2" class="div_img_jogador_add">
+                    <img id="img_jogador2" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador2" class="nome_jogador">SF</span>
+            </div>
+            <!-- JOGADOR 3 -->
+            <div id="div_jogador3" class="add_jogador">
+                <div id="div_img_jogador3" class="div_img_jogador_add">
+                    <img id="img_jogador3" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador3" class="nome_jogador">PF</span>
+            </div>
+            <!-- JOGADOR 4 -->
+            <div id="div_jogador4" class="add_jogador">
+                <div id="div_img_jogador4" class="div_img_jogador_add">
+                    <img id="img_jogador4" src="./assets/img/icon_plus.png" class="icon_plus">
+                </div>
+                <span id="span_nome_jogador4" class="nome_jogador">C</span>
+            </div>
         </div>
-        <img src="./assets/img/kyrie_layoup.jpg">
-    </main>
 
-    <footer>
-        <img src="./assets/img/icon.png">
-        <div id="container_footer">
-            <a href="#main_tutorial">
-                <div class="div_button">
-                    <span class="text">• Como Jogar?</span>
-                </div>
-            </a>
-            <a href="#main_sobre">
-                <div class="div_button">
-                    <span class="text">Sobre Nós</span>
-                </div>
-            </a>
-            <a href="">
-                <div class="div_button">
-                    <span class="text">Raking</span>
-                </div>
-            </a>
-            <a href="">
-                <div class="div_button">
-                    <span class="text">Cadastro</span>
-                </div>
-            </a>
-            <a href="">
-                <div class="div_button">
-                    <span class="text">Login</span>
-                </div>
-            </a>
-        </div>
-    </footer>
+        <!-- PARTE DA DIREITA, MERCADO -->
+        <aside id="aside_mercado">
+            <div id="titulo_mercado">
+                <span>Mercado de jogadores</span>
+            </div>
+            <div id="container_jogadores_mercado">
+            </div>
+        </aside>
+    </main>
 </body>
 
 </html>
 
+<!-- JS PARA TELA DE LOGIN E CADASTRO -->
+<script src="./js/cadastro.js"></script>
+<script src="./js/login.js"></script>
 <script>
-    // MUDAR BACKGROUD DA HEADER
-    window.addEventListener('scroll', function () {
-        let header = document.querySelector('#header')
-        header.classList.toggle('rolagem', window.scrollY > 400)
-    })
+    let formularioLogin = document.querySelector('#container_login')
+    let formularioCadastro = document.querySelector('#container_cadastro')
+    let mainTime = document.querySelector('#main_time')
 
-    // EFEITO HOVER NOS CARDS
-    let cardAmigos = document.querySelector('#card_amigos')
-    let cardAllStars = document.querySelector('#card_allStars')
-    let cardPontos = document.querySelector('#card_pontos')
-    cardAmigos.addEventListener('mouseover', function() {
-        cardAmigos.style.width = '75vw'
-        cardAllStars.style.width = '10vw'
-        cardPontos.style.width = '10vw'
-        card_amigos.classList.add('ajustar_foto_amigos')
-        card_allStars.classList.remove('ajustar_all_stars')
-        card_pontos.classList.remove('ajustar_foto_pontos')
-        text_amigos.classList.remove('oculto')
-        text_allStars.classList.add('oculto')
-        text_pontos.classList.add('oculto')
-    })
-    cardAllStars.addEventListener('mouseover', function() {
-        cardAmigos.style.width = '10vw'
-        cardAllStars.style.width = '75vw'
-        cardPontos.style.width = '10vw'
-        card_amigos.classList.remove('ajustar_foto_amigos')
-        card_allStars.classList.add('ajustar_all_stars')
-        card_pontos.classList.remove('ajustar_foto_pontos')
-        text_amigos.classList.add('oculto')
-        text_allStars.classList.remove('oculto')
-        text_pontos.classList.add('oculto')
-    })
-    cardPontos.addEventListener('mouseover', function() {
-        cardAmigos.style.width = '10vw'
-        cardAllStars.style.width = '10vw'
-        cardPontos.style.width = '75vw'
-        card_amigos.classList.remove('ajustar_foto_amigos')
-        card_allStars.classList.remove('ajustar_all_stars')
-        card_pontos.classList.add('ajustar_foto_pontos')
-        text_amigos.classList.add('oculto')
-        text_allStars.classList.add('oculto')
-        text_pontos.classList.remove('oculto')
-    })
+    function mostrarLogin() {
+        mainTime.classList.add('blur')
+        formularioLogin.classList.remove('oculto')
+        formularioCadastro.classList.add('oculto')
+        span_login.style.fontSize = '2.5vw'
+        span_cadastro.style.fontSize = '2vw'
+    }
 
-    // VOLTAR AO NORMAL
-    cardAmigos.addEventListener('mouseout', function() {
-        cardAmigos.style.width = '30vw'
-        cardAllStars.style.width = '30vw'
-        cardPontos.style.width = '30vw'
-        card_amigos.classList.remove('ajustar_foto_amigos')
-        card_allStars.classList.remove('ajustar_all_stars')
-        card_pontos.classList.remove('ajustar_foto_pontos')
-        text_amigos.classList.remove('oculto')
-        text_allStars.classList.remove('oculto')
-        text_pontos.classList.remove('oculto')
-    })
-    cardAllStars.addEventListener('mouseout', function() {
-        cardAmigos.style.width = '30vw'
-        cardAllStars.style.width = '30vw'
-        cardPontos.style.width = '30vw'
-        card_amigos.classList.remove('ajustar_foto_amigos')
-        card_allStars.classList.remove('ajustar_all_stars')
-        card_pontos.classList.remove('ajustar_foto_pontos')
-        text_amigos.classList.remove('oculto')
-        text_allStars.classList.remove('oculto')
-        text_pontos.classList.remove('oculto')
-    })
-    cardPontos.addEventListener('mouseout', function() {
-        cardAmigos.style.width = '30vw'
-        cardAllStars.style.width = '30vw'
-        cardPontos.style.width = '30vw'
-        card_amigos.classList.remove('ajustar_foto_amigos')
-        card_allStars.classList.remove('ajustar_all_stars')
-        card_pontos.classList.remove('ajustar_foto_pontos')
-        text_amigos.classList.remove('oculto')
-        text_allStars.classList.remove('oculto')
-        text_pontos.classList.remove('oculto')
-    })
+    function mostrarCadastro() {
+        mainTime.classList.add('blur')
+        formularioLogin.classList.add('oculto')
+        formularioCadastro.classList.remove('oculto')
+        span_login.style.fontSize = '2vw'
+        span_cadastro.style.fontSize = '2.3vw'
+        document.title = 'cadastro teste'
+    }
 
-
+    function fecharlogin() {
+        mainTime.classList.remove('blur')
+        container_login_cadastro.style.display = 'none'
+        alert(`logado com sucesso`)
+    }
 </script>
+
+<!-- JS PARA MONTAGEM DE TIME -->
+<script src="./js/funcMercadoJogadores.js"></script>
+<script src="./js/funcTimeUser.js"></script>
+
+<!-- JS PARA SUBSTITUIR CSS -->
+<script src="./js/efeitosCSS.js"></script>
+
+<body onload="mostrarLogin()">

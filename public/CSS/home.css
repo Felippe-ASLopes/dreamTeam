@@ -129,7 +129,7 @@ body {
     align-items: center;
 }
 
-#login_button {
+.login_button {
     width: 10vw;
     height: 5vh;
     border-radius: 5px;
