@@ -1,3 +1,7 @@
+// ADICIONAR O INNERHTML COM OPACITY 0 E EXECUTAR UMA FUNC DPS DE 0.3S PARAR MUDAR A OPACITTY PARA 1
+
+
+
 const timeUser = ['', '', '', '', '']
 
 function addJogador(e) {
@@ -10,6 +14,10 @@ function addJogador(e) {
     if (posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') {
         for (let i = 0; i <= 2; i++) {
             if (timeUser[i] == '') {
+                // ATUALIZA O VETOR timeUser
+                timeUser[i] = idJogadorAdd
+
+                // ADD NO TIMEUSER, PARTE DIREITA
                 const divAlterarTime = document.getElementById(`jogador${i}`)
 
                 divAlterarTime.innerHTML = `
@@ -47,7 +55,7 @@ function addJogador(e) {
                 spanAlterar.innerHTML = listaJogadores[idJogadorAdd]
 
 
-                // ADD NO TIMEUSER, PARTE DIREITA
+                // REMOVER DO MERCADO
                 const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
 
                 divAlterarMercado.style.display = 'none'
@@ -58,6 +66,10 @@ function addJogador(e) {
     else if (posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') {
         for (let i = 2; i <= 4; i++) {
             if (timeUser[i] == '') {
+                // ATUALIZA O VETOR timeUser
+                timeUser[i] = idJogadorAdd
+                
+                // ADD NO TIMEUSER, PARTE DIREITA
                 const divAlterar = document.getElementById(`jogador${i}`)
 
                 divAlterar.innerHTML = `
@@ -95,7 +107,7 @@ function addJogador(e) {
                 spanAlterar.innerHTML = listaJogadores[idJogadorAdd]
 
 
-                // ADD NO TIMEUSER, PARTE DIREITA
+                // REMOVER DO MERCADO
                 const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
 
                 divAlterarMercado.style.display = 'none'
