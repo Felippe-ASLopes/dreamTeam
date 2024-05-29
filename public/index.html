@@ -55,16 +55,15 @@
         <aside id="aside_user">
             <div id="info_user">
                 <div id="div_nome_time">
-                    <span>Nome do time: Teste</span>
                 </div>
                 <div id="div_dinheiro_time">
                     <div class="div_valor">
                         <span>Dinheiro restante:</span>
-                        <span id="dinheiro_total">$ 70</span>
+                        <span id="dinheiro_total"></span>
                     </div>
                     <div class="div_valor">
                         <span>Valor do time:</span>
-                        <span id="valor_time">$ 30</span>
+                        <span id="valor_time"></span>
                     </div>
                 </div>
             </div>
@@ -136,37 +135,11 @@
 
 </html>
 
-<!-- JS PARA TELA DE LOGIN E CADASTRO -->
-<script src="./js/cadastro.js"></script>
-<script src="./js/login.js"></script>
 <script>
-    let formularioLogin = document.querySelector('#container_login')
-    let formularioCadastro = document.querySelector('#container_cadastro')
-    let mainTime = document.querySelector('#main_time')
-
-    function mostrarLogin() {
-        mainTime.classList.add('blur')
-        formularioLogin.classList.remove('oculto')
-        formularioCadastro.classList.add('oculto')
-        span_login.style.fontSize = '2.5vw'
-        span_cadastro.style.fontSize = '2vw'
-    }
-
-    function mostrarCadastro() {
-        mainTime.classList.add('blur')
-        formularioLogin.classList.add('oculto')
-        formularioCadastro.classList.remove('oculto')
-        span_login.style.fontSize = '2vw'
-        span_cadastro.style.fontSize = '2.3vw'
-        document.title = 'cadastro teste'
-    }
-
-    function fecharlogin() {
-        mainTime.classList.remove('blur')
-        container_login_cadastro.style.display = 'none'
-        alert(`logado com sucesso`)
-    }
 </script>
+
+<!-- JS PARA TELA DE LOGIN E CADASTRO -->
+<script src="./js/loginCadastro.js"></script>
 
 <!-- JS PARA MONTAGEM DE TIME -->
 <script src="./js/funcMercadoJogadores.js"></script>
@@ -175,4 +148,4 @@
 <!-- JS PARA SUBSTITUIR CSS -->
 <script src="./js/efeitosCSS.js"></script>
 
-<body onload="mostrarLogin()">
+<body onload="mostrarLogin(), obterJogadores()">

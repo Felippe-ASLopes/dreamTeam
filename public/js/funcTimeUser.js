@@ -1,14 +1,30 @@
+const timeUser = ['', '', '', '', '']
+let dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
+let valorTime = 0
+
+function carregarTimeUser() {
+    div_nome_time.innerHTML = `
+    <span>${sessionStorage.NOME_USUARIO}</span>`
+    atualizarDinheiroUser()
+}
+
+function atualizarDinheiroUser() {
+    const dinheiroRestante = dinheiroUser - valorTime
+
+    dinheiro_total.innerHTML = `
+    $ ${dinheiroRestante}`
+
+    valor_time.innerHTML = `
+    $ ${valorTime}`
+}
+
+
 // ADICIONAR O INNERHTML COM OPACITY 0 E EXECUTAR UMA FUNC DPS DE 0.3S PARAR MUDAR A OPACITTY PARA 1
 
-
-
-const timeUser = ['', '', '', '', '']
-
-function addJogador(e) {
+function addJogador() {
     // CAPTURA O ID DO ELEMENTO CLICADO
     const elemento = event.target.closest('.background_add');
     const idJogadorAdd = elemento.id;
-
     const posicaoJogadorAdd = listaPosicaoJogadores[idJogadorAdd]
 
     if (posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') {
@@ -16,6 +32,10 @@ function addJogador(e) {
             if (timeUser[i] == '') {
                 // ATUALIZA O VETOR timeUser
                 timeUser[i] = idJogadorAdd
+
+                // ATULIZA VALOR TIME
+                valorTime += listaValorJogadores[idJogadorAdd]
+                atualizarDinheiroUser()
 
                 // ADD NO TIMEUSER, PARTE DIREITA
                 const divAlterarTime = document.getElementById(`jogador${i}`)
@@ -68,7 +88,11 @@ function addJogador(e) {
             if (timeUser[i] == '') {
                 // ATUALIZA O VETOR timeUser
                 timeUser[i] = idJogadorAdd
-                
+
+                // ATULIZA VALOR TIME
+                valorTime += listaValorJogadores[idJogadorAdd]
+                atualizarDinheiroUser()
+
                 // ADD NO TIMEUSER, PARTE DIREITA
                 const divAlterar = document.getElementById(`jogador${i}`)
 

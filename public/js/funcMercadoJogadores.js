@@ -34,3 +34,27 @@ for (posicao = 0; posicao < TAMANHO_LISTA; posicao++) {
             </div>
     </div>`
 }
+
+function obterJogadores() {
+    fetch("/jogadores/obter", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                console.log("Jogadores:", json);
+                // Aqui você pode processar os dados recebidos, por exemplo, atualizar a interface do usuário
+            });
+        } else {
+            console.log("Houve um erro ao tentar obter os jogadores!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+    }).catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+    });
+}
