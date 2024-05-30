@@ -34,8 +34,8 @@ function login() {
                 console.log(json);
                 console.log(JSON.stringify(json));
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.NOME_USUARIO = json.nomeTime;
+                sessionStorage.ID_USUARIO = json.idUsuario;
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
                 carregarTimeUser()
                 fecharlogin()

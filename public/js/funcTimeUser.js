@@ -1,6 +1,7 @@
 const timeUser = ['', '', '', '', '']
-let dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
+const dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
 let valorTime = 0
+let dinheiroRestante = dinheiroUser
 
 function carregarTimeUser() {
     div_nome_time.innerHTML = `
@@ -9,7 +10,7 @@ function carregarTimeUser() {
 }
 
 function atualizarDinheiroUser() {
-    const dinheiroRestante = dinheiroUser - valorTime
+    dinheiroRestante = dinheiroUser - valorTime
 
     dinheiro_total.innerHTML = `
     $ ${dinheiroRestante}`
@@ -21,32 +22,35 @@ function atualizarDinheiroUser() {
 
 // ADICIONAR O INNERHTML COM OPACITY 0 E EXECUTAR UMA FUNC DPS DE 0.3S PARAR MUDAR A OPACITTY PARA 1
 
-function addJogador() {
-    // CAPTURA O ID DO ELEMENTO CLICADO
+function addJogador(jogadores) {
     const elemento = event.target.closest('.background_add');
     const idJogadorAdd = elemento.id;
-    const posicaoJogadorAdd = listaPosicaoJogadores[idJogadorAdd]
+
+
+    const nomeJogadorAdd = jogadores.nomeJogador[idJogadorAdd - 1]
+    const posicaoJogadorAdd = jogadores.sigla[idJogadorAdd - 1]
+    const valorJogadorAdd = jogadores.preco[idJogadorAdd - 1]
 
     if (posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') {
-        for (let i = 0; i <= 2; i++) {
-            if (timeUser[i] == '') {
+        for (let posicao = 0; posicao <= 2; posicao++) {
+            if (timeUser[posicao] == '' && valorJogadorAdd <= dinheiroRestante) {
                 // ATUALIZA O VETOR timeUser
-                timeUser[i] = idJogadorAdd
+                timeUser[posicao] = idJogadorAdd
 
                 // ATULIZA VALOR TIME
-                valorTime += listaValorJogadores[idJogadorAdd]
+                valorTime += valorJogadorAdd
                 atualizarDinheiroUser()
 
-                // ADD NO TIMEUSER, PARTE DIREITA
-                const divAlterarTime = document.getElementById(`jogador${i}`)
+                // ADD NO TIMEUSER
+                const divAlterarTime = document.getElementById(`jogador${posicao}`)
 
                 divAlterarTime.innerHTML = `
                 <div class="div_img_jogador">
-                    <img src="${listaFotoJogadores[idJogadorAdd]}" class="img_jogador">
+                    <img src="" class="img_jogador">
                 </div>
                 <div class="container_info_jogador">
                     <div class="div_nome_jogador">
-                        <span>${listaJogadores[idJogadorAdd]}</span>
+                        <span>${nomeJogadorAdd}</span>
                     </div>
                     <div class="div_valor_add">
                         <div class="div_info_jogador">
@@ -55,7 +59,7 @@ function addJogador() {
                         </div>
                         <div class="div_info_jogador">
                             <span>Valor:</span>
-                            <span>$ ${listaValorJogadores[idJogadorAdd]}</span>
+                            <span>$ ${valorJogadorAdd}</span>
                         </div>
                         <div class="div_info_jogador">
                             <div class="background_remove">
@@ -66,43 +70,43 @@ function addJogador() {
                 </div>`
 
                 // ADD NO CAMPO
-                const imgAlterar = document.getElementById(`img_jogador${i}`)
-                imgAlterar.src = listaFotoJogadores[idJogadorAdd]
-                imgAlterar.classList.remove('icon_plus')
-                imgAlterar.classList.add('ajustar_foto_jogador')
+                // const imgAlterar = document.getElementById(`img_jogador${i}`)
+                // imgAlterar.src = listaFotoJogadores[idJogadorAdd]
+                // imgAlterar.classList.remove('icon_plus')
+                // imgAlterar.classList.add('ajustar_foto_jogador')
 
-                const spanAlterar = document.getElementById(`span_nome_jogador${i}`)
-                spanAlterar.innerHTML = listaJogadores[idJogadorAdd]
+                const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
+                spanAlterar.innerHTML = nomeJogadorAdd
 
 
                 // REMOVER DO MERCADO
                 const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
-
                 divAlterarMercado.style.display = 'none'
+
                 break
             }
         }
     }
     else if (posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') {
         for (let i = 2; i <= 4; i++) {
-            if (timeUser[i] == '') {
+            if (timeUser[i] == '' && valorJogadorAdd <= dinheiroRestante) {
                 // ATUALIZA O VETOR timeUser
-                timeUser[i] = idJogadorAdd
+                timeUser[posicao] = idJogadorAdd
 
                 // ATULIZA VALOR TIME
-                valorTime += listaValorJogadores[idJogadorAdd]
+                valorTime += valorJogadorAdd
                 atualizarDinheiroUser()
 
-                // ADD NO TIMEUSER, PARTE DIREITA
-                const divAlterar = document.getElementById(`jogador${i}`)
+                // ADD NO TIMEUSER
+                const divAlterarTime = document.getElementById(`jogador${posicao}`)
 
-                divAlterar.innerHTML = `
+                divAlterarTime.innerHTML = `
                 <div class="div_img_jogador">
-                    <img src="${listaFotoJogadores[idJogadorAdd]}" class="img_jogador">
+                    <img src="" class="img_jogador">
                 </div>
                 <div class="container_info_jogador">
                     <div class="div_nome_jogador">
-                        <span>${listaJogadores[idJogadorAdd]}</span>
+                        <span>${nomeJogadorAdd}</span>
                     </div>
                     <div class="div_valor_add">
                         <div class="div_info_jogador">
@@ -111,7 +115,7 @@ function addJogador() {
                         </div>
                         <div class="div_info_jogador">
                             <span>Valor:</span>
-                            <span>$ ${listaValorJogadores[idJogadorAdd]}</span>
+                            <span>$ ${valorJogadorAdd}</span>
                         </div>
                         <div class="div_info_jogador">
                             <div class="background_remove">
@@ -122,22 +126,25 @@ function addJogador() {
                 </div>`
 
                 // ADD NO CAMPO
-                const imgAlterar = document.getElementById(`img_jogador${i}`)
-                imgAlterar.src = listaFotoJogadores[idJogadorAdd]
-                imgAlterar.classList.remove('icon_plus')
-                imgAlterar.classList.add('ajustar_foto_jogador')
+                // const imgAlterar = document.getElementById(`img_jogador${i}`)
+                // imgAlterar.src = listaFotoJogadores[idJogadorAdd]
+                // imgAlterar.classList.remove('icon_plus')
+                // imgAlterar.classList.add('ajustar_foto_jogador')
 
-                const spanAlterar = document.getElementById(`span_nome_jogador${i}`)
-                spanAlterar.innerHTML = listaJogadores[idJogadorAdd]
+                const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
+                spanAlterar.innerHTML = nomeJogadorAdd
 
 
                 // REMOVER DO MERCADO
                 const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
-
                 divAlterarMercado.style.display = 'none'
-
+                
                 break
             }
         }
     }
+}
+
+function salvarTime() {
+    
 }

@@ -337,6 +337,54 @@ aside {
     opacity: 1;
 }
 
+#container_enviar_time {
+    width: 12vw;
+    height: 7vh;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    top: 90%;
+    left: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 5px #000000be;
+    transition: 0.25s;
+}
+
+#div_icon_enviar_time {
+    width: 25%;
+    height: 100%;
+    background-color: #006128;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#div_text_enviar_time {
+    width: 75%;
+    height: 100%;
+    background-color: #007A33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 1.2vw;
+    font-weight: 100;
+    border-radius: 0px 10px 10px 0px;
+}
+
+#icon_seta {
+    width: 90%;
+    height: 70%;
+}
+
+#container_enviar_time:hover {
+    transform: scale(1.05);
+    box-shadow: 3px 3px 10px #000000be;
+}
+
 /* PARTE DA DIREITA, MERCADO
 USAR OVERFLOW*/
 #titulo_mercado {

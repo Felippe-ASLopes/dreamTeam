@@ -12,8 +12,4 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
-router.post("/autenticarJogadores", function (req, res) {
-    usuarioController.autenticarJogadores(req, res);
-});
-
 module.exports = router;
