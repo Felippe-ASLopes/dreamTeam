@@ -1,9 +1,10 @@
 const timeUser = ['', '', '', '', '']
-const dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
+let dinheiroUser = 0
 let valorTime = 0
-let dinheiroRestante = dinheiroUser
+let dinheiroRestante = 0
 
 function carregarTimeUser() {
+    dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
     div_nome_time.innerHTML = `
     <span>${sessionStorage.NOME_USUARIO}</span>`
     atualizarDinheiroUser()
@@ -34,7 +35,7 @@ function addJogador() {
         alert('Dinheiro insuficiente')
     }
     else {
-        if (posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') {
+        if ((posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') && (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
             for (let posicao = 0; posicao <= 2; posicao++) {
                 if (timeUser[posicao] == '') {
                     // ATUALIZA O VETOR timeUser
@@ -88,12 +89,9 @@ function addJogador() {
 
                     break
                 }
-                else {
-                    alert('Impossível adicionar outro jogador para esta posição!')
-                }
             }
         }
-        else if (posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') {
+        else if ((posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') && (timeUser[2] == '' || timeUser[3] == '' || timeUser[4] == '')) {
             for (let posicao = 2; posicao <= 4; posicao++) {
                 if (timeUser[posicao] == '' && valorJogadorAdd <= dinheiroRestante) {
                     // ATUALIZA O VETOR timeUser
@@ -147,10 +145,10 @@ function addJogador() {
 
                     break
                 }
-                else {
-                    alert('Impossível adicionar outro jogador para esta posição!')
-                }
             }
+        }
+        else {
+            alert('Impossível adicionar outro jogador para esta posição!')
         }
     }
 }

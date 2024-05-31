@@ -154,12 +154,12 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1vw;
+    gap: 0.5vw;
     font-family: gliker;
 }
 
 aside {
-    width: 23vw;
+    width: 23.7vw;
     height: 90vh;
     background-color: #0077C0;
     border-radius: 20px;
@@ -385,8 +385,7 @@ aside {
     box-shadow: 3px 3px 10px #000000be;
 }
 
-/* PARTE DA DIREITA, MERCADO
-USAR OVERFLOW*/
+/* PARTE DA DIREITA, MERCADO*/
 #titulo_mercado {
     width: 100%;
     height: 5vh;
@@ -399,16 +398,30 @@ USAR OVERFLOW*/
 
 #container_jogadores_mercado {
     width: 100%;
-    height: 100%;
+    max-height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    overflow-y: scroll;
+}
+
+#container_jogadores_mercado::-webkit-scrollbar {
+    width: 7px;
+}
+
+#container_jogadores_mercado::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#container_jogadores_mercado::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 5px;
 }
 
 .container_jogador_mercado {
     width: 100%;
-    height: 15.5%;
+    min-height: 15.5%;
     display: flex;
     border-bottom: solid #0000004b;
     flex-direction: row;

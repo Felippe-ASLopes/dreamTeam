@@ -24,7 +24,6 @@ function autenticar(req, res) {
                             nome: resultadoAutenticar[0].nomeTime,
                             senha: resultadoAutenticar[0].senha,
                             dinheiro: resultadoAutenticar[0].dinheiro,
-
                         });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");

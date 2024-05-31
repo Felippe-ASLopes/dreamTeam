@@ -1,6 +1,10 @@
 create database dreamTeam;
 use dreamTeam;
 
+create user 'API'@'localhost' identified by 'webDataViz0API';
+grant insert, select, update on dreamTeam.* to 'API'@'localhost';
+show grants for 'API'@'localhost';
+
 create table usuario (
 idUsuario int primary key auto_increment,
 nomeTime varchar(24),
@@ -44,6 +48,7 @@ nomeJogador varchar(45),
 sobrenome varchar(45),
 fkPosicao int,
 preco decimal(5,2),
+urlImagem varchar(150),
 constraint fkTimeJogador foreign key (fkTime) references timeNba (idTime),
 constraint fkPosicaoJogador foreign key (fkPosicao) references posicao (idPosicao)
 );
@@ -89,14 +94,27 @@ insert into posicao (sigla) values
 ('C');
 
 insert into timeNba (cidade, nomeTimeNba) values
-('Brooklyn', 'Nets');
+('Los Angeles', 'Lakers'),
+('Boston', 'Celtics'),
+('Dallas', 'Mavericks'),
+('Minnesota', 'Timberwolves'),
+('Brooklyn', 'Nets'),
+('Milwaukee', 'Bucks'),
+(null, 'Golden State Warriors');
 
-insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco) values
-(5, 'Ben', 'Simmons', 1, 5.00);
+insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco, urlImagem) values
+(1, 'LeBron', 'James', 3, 30.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png&w=350&h=254'),
+(3, 'Kyrie', 'Irving', 1, 15.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6442.png&w=350&h=254'),
+(2, 'Jayson', 'Tatum', 3, 25.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4065648.png&w=350&h=254'),
+(1, 'Anthony', 'Davis', 5, 25.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6583.png&w=350&h=254'),
+(4, 'Anthony', 'Edwards', 2, 15.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4594268.png&w=350&h=254'),
+(5, 'Ben', 'Simmons', 1, 5.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3907387.png&w=350&h=254'),
+(3, 'Luka' , 'Dončić', 2, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3945274.png&w=350&h=254'),
+(6, 'Giannis', 'Antetokounmpo', 4, 25, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3032977.png&w=350&h=254'),
+(7, 'Stephen', 'Curry', 1, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254');
 
-select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador
-join timeNba on fkTime = idTime
-join posicao on fkPosicao = idPosicao order by idJogador;
+insert into rodada values
+(default, '2024-12-30 00:00:00', '2024-12-30 23:59:59');
 
 select * from usuario;
 select * from jogador;
@@ -104,13 +122,25 @@ select * from timeNBA;
 select * from timeUsuario;
 select * from rodada;
 
-select nomeTime, fkrodada, jogador1.nomeJogador as 'PG', jogador2.nomeJogador as 'SG', jogador3.nomeJogador as 'SF', jogador4.nomeJogador as 'PF', jogador5.nomeJogador as 'C' from timeUsuario
+select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador
+join timeNba on fkTime = idTime
+join posicao on fkPosicao = idPosicao order by idJogador;
+
+select nomeTime, fkrodada as 'Rodada', 
+concat(j1.nomeJogador, ' ', j1.sobrenome) as 'PG', 
+concat(j2.nomeJogador, ' ', j2.sobrenome) as 'SG', 
+concat(j3.nomeJogador, ' ', j3.sobrenome) as 'SF', 
+concat(j4.nomeJogador, ' ', j4.sobrenome) as 'PF', 
+concat(j5.nomeJogador, ' ', j5.sobrenome) as 'C' 
+from timeUsuario
 join usuario on fkusuario = idUsuario
 join rodada on fkRodada
-join jogador as jogador1 on fkJogador1 = jogador1.idJogador
-join jogador as jogador2 on fkJogador2 = jogador2.idJogador
-join jogador as jogador3 on fkJogador3 = jogador3.idJogador
-join jogador as jogador4 on fkJogador4 = jogador4.idJogador
-join jogador as jogador5 on fkJogador5 = jogador5.idJogador;
+join jogador as j1 on fkJogador1 = j1.idJogador
+join jogador as j2 on fkJogador2 = j2.idJogador
+join jogador as j3 on fkJogador3 = j3.idJogador
+join jogador as j4 on fkJogador4 = j4.idJogador
+join jogador as j5 on fkJogador5 = j5.idJogador;
 
-truncate table timeUsuario;
+-- COMANDOS PARA TESTE --
+-- update usuario set dinheiro = 999.99 where idUsuario = 1; --
+-- truncate table timeUsuario; --
