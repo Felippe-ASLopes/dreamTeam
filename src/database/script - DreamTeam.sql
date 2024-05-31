@@ -70,6 +70,7 @@ fkJogador2 int,
 fkJogador3 int,
 fkJogador4 int,
 fkJogador5 int,
+valor decimal(5,2),
 constraint fkUsuarioTime foreign key (fkUsuario) references usuario (idUsuario),
 constraint fkRodadaTime foreign key (fkRodada) references rodada (idRodada),
 constraint fkjogador1Time foreign key (fkJogador1) references jogador (idJogador),
@@ -87,21 +88,29 @@ insert into posicao (sigla) values
 ('PF'),
 ('C');
 
-insert into timeNba (cidade, nome) values
-('Los Angeles', 'Lakers'),
-('Boston', 'Celtics'),
-('Dallas', 'Mavericks'),
-('Minnesota', 'Timberwolves');
+insert into timeNba (cidade, nomeTimeNba) values
+('Brooklyn', 'Nets');
 
-insert into jogador (fkTime, nome, sobrenome, fkPosicao, preco) values
-(1, 'LeBron', 'James', 3, 30.00),
-(3, 'Kyrie', 'Irving', 1, 15.00),
-(2, 'Jayson', 'Tatum', 3, 25.00),
-(1, 'Anthony', 'Davis', 5, 25.00),
-(4, 'Anthony', 'Edwards', 5, 15.00);
+insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco) values
+(5, 'Ben', 'Simmons', 1, 5.00);
 
-select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador 
-    join timeNba on fkTime = idTime
-    join posicao on fkPosicao = idPosicao;
+select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador
+join timeNba on fkTime = idTime
+join posicao on fkPosicao = idPosicao order by idJogador;
 
 select * from usuario;
+select * from jogador;
+select * from timeNBA;
+select * from timeUsuario;
+select * from rodada;
+
+select nomeTime, fkrodada, jogador1.nomeJogador as 'PG', jogador2.nomeJogador as 'SG', jogador3.nomeJogador as 'SF', jogador4.nomeJogador as 'PF', jogador5.nomeJogador as 'C' from timeUsuario
+join usuario on fkusuario = idUsuario
+join rodada on fkRodada
+join jogador as jogador1 on fkJogador1 = jogador1.idJogador
+join jogador as jogador2 on fkJogador2 = jogador2.idJogador
+join jogador as jogador3 on fkJogador3 = jogador3.idJogador
+join jogador as jogador4 on fkJogador4 = jogador4.idJogador
+join jogador as jogador5 on fkJogador5 = jogador5.idJogador;
+
+truncate table timeUsuario;

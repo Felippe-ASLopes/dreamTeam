@@ -1,28 +1,33 @@
 var database = require("../database/config")
 
 function autenticar(email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucaoSql = `
-        SELECT idUsuario, nomeTime, email, dinheiro FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+        SELECT idUsuario, nomeTime, email, dinheiro FROM usuario WHERE email = '${email}' AND senha = md5('${senha}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
-    
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO usuario (nomeTime, email, senha, dinheiro) VALUES ('${nome}', '${email}', '${senha}', 100);
+        INSERT INTO usuario (nomeTime, email, senha, dinheiro) VALUES ('${nome}', '${email}', md5('${senha}'), 100);
     `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function inserirTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
+    var instrucaoSql = `
+        INSERT INTO timeUsuario VALUES
+        (${idUsuario}, 1, ${jogador1}, ${jogador2}, ${jogador3}, ${jogador4}, ${jogador5}, ${valor});
+    `;
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    inserirTime
 };

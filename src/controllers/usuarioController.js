@@ -76,7 +76,20 @@ function cadastrar(req, res) {
     }
 }
 
+function inserirTime(req, res) {
+    const { idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor } = req.body;
+
+    usuarioModel.inserirTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor)
+        .then(result => {
+            res.status(200).send("Time inserido com sucesso!");
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    inserirTime
 }

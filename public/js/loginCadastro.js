@@ -1,19 +1,15 @@
 // FUNÇÕES DA API
 function login() {
-    var emailVar = input_login_email.value;
-    var senhaVar = input_login_senha.value;
+    const emailVar = input_login_email.value;
+    const senhaVar = input_login_senha.value;
 
     if (emailVar == "" || senhaVar == "") {
-        alert('Mensagem de erro para todos os campos em branco');
+        alert('Preencha todos os campos para realizar o login!');
         return false;
     }
     else {
         // setInterval(sumirMensagem, 5000)
     }
-
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
-
     fetch("/usuarios/autenticar", {
         method: "POST",
         headers: {
@@ -24,18 +20,15 @@ function login() {
             senhaServer: senhaVar
         })
     }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!")
-
         if (resposta.ok) {
-            console.log("if resposta ok!")
             console.log(resposta);
 
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nomeTime;
-                sessionStorage.ID_USUARIO = json.idUsuario;
+                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.ID_USUARIO = json.id;
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
                 carregarTimeUser()
                 fecharlogin()
@@ -62,35 +55,27 @@ function login() {
 }
 
 function cadastrar() {
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = input_cadastro_username.value;
-    var emailVar = input_cadastro_email.value;
-    var senhaVar = input_cadastro_senha.value;
-    var confirmacaoSenhaVar = input_confirmacao_senha.value;
+    const nomeVar = input_cadastro_username.value;
+    const emailVar = input_cadastro_email.value;
+    const senhaVar = input_cadastro_senha.value;
+    const confirmacaoSenhaVar = input_confirmacao_senha.value;
 
-    if (
-        nomeVar == "" ||
-        emailVar == "" ||
-        senhaVar == "" ||
-        confirmacaoSenhaVar == "" ||
-        confirmacaoSenhaVar != senhaVar
-    ) {
-        alert('Mensagem de erro para todos os campos em branco');
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+        alert('Preencha todos os campos para realizar o cadastro!');
+        return false;
+    } else if (confirmacaoSenhaVar != senhaVar) {
+        alert('Os campos Senha e Confirmação de Senha devem ser iguais para realizar o cadastro!')
         return false;
     } else {
         //   setInterval(sumirMensagem, 5000);
     }
 
-    // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
             nomeServer: nomeVar,
             emailServer: emailVar,
             senhaServer: senhaVar,

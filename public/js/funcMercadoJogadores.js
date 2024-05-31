@@ -35,6 +35,8 @@
 //     </div>`
 // }
 
+let jogadores = []
+
 function obterJogadores() {
     fetch("/jogadores/obter", {
         method: "GET",
@@ -44,8 +46,9 @@ function obterJogadores() {
     }).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(json => {
-                console.log("Jogadores:", json);
-                exibirJogadores(json)
+                jogadores = json
+                console.log("Jogadores:", jogadores);
+                exibirJogadores()
             });
         } else {
             console.log("Houve um erro ao tentar obter os jogadores!");
@@ -59,13 +62,14 @@ function obterJogadores() {
     });
 }
 
-function exibirJogadores(jogadores) {
+function exibirJogadores() {
 
-    jogadores.forEach(jogador => {
-        var idJogador = jogador.idJogador;
-        var nome = jogador.nomeJogador;
-        var sobrenome = jogador.sobrenome;
-        var valor = jogador.valor;
+    jogadores.forEach((jogador) => {
+        const idJogador = jogador.idJogador;
+        const nome = jogador.nomeJogador;
+        const sobrenome = jogador.sobrenome;
+        const posicao = jogador.sigla;
+        const valor = Number(jogador.preco);
 
         container_jogadores_mercado.innerHTML += `
             <div id="mercado_jogador${idJogador}" class="container_jogador_mercado" draggable="true">
@@ -79,7 +83,7 @@ function exibirJogadores(jogadores) {
                     <div class="div_valor_add">
                         <div class="div_info_jogador">
                             <span>Posicao:</span>
-                            <span>SF</span>
+                            <span>${posicao}</span>
                         </div>
                         <div class="div_info_jogador">
                             <span>Valor:</span>
