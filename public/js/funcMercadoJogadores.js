@@ -26,13 +26,12 @@ function obterJogadores() {
 }
 
 function exibirJogadores() {
-
     jogadores.forEach((jogador) => {
-        const idJogador = jogador.idJogador;
-        const nome = jogador.nomeJogador;
-        const sobrenome = jogador.sobrenome;
-        const posicao = jogador.sigla;
-        const valor = Number(jogador.preco);
+        const idJogador = jogador.idJogador
+        const nome = jogador.nomeJogador
+        const sobrenome = jogador.sobrenome
+        const posicao = jogador.sigla
+        const valor = Number(jogador.preco)
         const img = jogador.urlImagem
 
         container_jogadores_mercado.innerHTML += `

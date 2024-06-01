@@ -41,6 +41,18 @@ function autenticar(req, res) {
     }
 }
 
+function obterTimeUsuario(req, res) {
+    var idUsuario = req.params.idUsuario;
+    usuarioModel.obterTimeUsuario(idUsuario)
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -76,9 +88,9 @@ function cadastrar(req, res) {
 }
 
 function inserirTime(req, res) {
-    const { idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor } = req.body;
+    const { idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor } = req.body;
 
-    usuarioModel.inserirTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor)
+    usuarioModel.inserirTime(idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor)
         .then(result => {
             res.status(200).send("Time inserido com sucesso!");
         })
@@ -89,9 +101,9 @@ function inserirTime(req, res) {
 }
 
 function atualizarTime(req, res) {
-    const { idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor } = req.body;
+    const { idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor } = req.body;
 
-        usuarioModel.atualizarTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor)
+        usuarioModel.atualizarTime(idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor)
             .then(result => {
                 res.status(200).send("Time atualizado com sucesso!");
             })
@@ -103,6 +115,7 @@ function atualizarTime(req, res) {
 
 module.exports = {
     autenticar,
+    obterTimeUsuario,
     cadastrar,
     inserirTime,
     atualizarTime

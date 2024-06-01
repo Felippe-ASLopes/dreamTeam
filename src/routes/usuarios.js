@@ -12,6 +12,10 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/obterTimeUsuario/:idUsuario", function (req, res) {
+    usuarioController.obterTimeUsuario(req, res);
+});
+
 router.post("/inserirTime", function (req, res) {
     usuarioController.inserirTime(req, res);
 });

@@ -8,6 +8,16 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql);
 }
 
+function obterTimeUsuario(idUsuario) {
+    var instrucaoSql = `
+        SELECT * FROM timeUsuario
+        WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario) and fkUsuario = ${idUsuario};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function cadastrar(nome, email, senha) {
     var instrucaoSql = `
         INSERT INTO usuario (nomeTime, email, senha, dinheiro) VALUES ('${nome}', '${email}', md5('${senha}'), 100);
@@ -16,17 +26,17 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucaoSql);
 }
 
-function inserirTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
+function inserirTime(idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
     var instrucaoSql = `
         INSERT INTO timeUsuario VALUES
-        (${idUsuario}, 1, ${jogador1}, ${jogador2}, ${jogador3}, ${jogador4}, ${jogador5}, ${valor});
+        (${idUsuario}, ${rodada}, ${jogador1}, ${jogador2}, ${jogador3}, ${jogador4}, ${jogador5}, ${valor});
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function atualizarTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
+function atualizarTime(idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
     var instrucaoSql = `
         UPDATE timeUsuario SET 
             fkJogador1 = ${jogador1}, 
@@ -37,7 +47,7 @@ function atualizarTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogado
             valor = ${valor}
         WHERE 
             fkUsuario = ${idUsuario} AND 
-            fkRodada = 1;
+            fkRodada = ${rodada};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -46,6 +56,7 @@ function atualizarTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogado
 
 module.exports = {
     autenticar,
+    obterTimeUsuario,
     cadastrar,
     inserirTime,
     atualizarTime

@@ -28,20 +28,22 @@
                 <input type="text" id="input_login_email" class="input_formulario">
                 <p>Senha:</p>
                 <input type="password" id="input_login_senha" class="input_formulario">
-                <div id="div_botao">
+                <div id="div_erro_login" class="div_erro"></div>
+                <div class="div_botao">
                     <button onclick="login()" class="login_button">Entrar</button>
                 </div>
             </div>
             <div id="container_cadastro" class="oculto">
                 <p>Nome do time:</p>
-                <input type="text" id="input_cadastro_username" class="input_formulario">
+                <input type="text" id="input_cadastro_username" class="input_formulario" maxlength="24">
                 <p>Email:</p>
                 <input type="text" id="input_cadastro_email" class="input_formulario">
                 <p>Senha:</p>
                 <input type="password" id="input_cadastro_senha" class="input_formulario">
                 <p>Confirme sua senha:</p>
                 <input type="password" id="input_confirmacao_senha" class="input_formulario">
-                <div id="div_botao">
+                <div id="div_erro_cadastro" class="div_erro"></div>
+                <div class="div_botao">
                     <button onclick="cadastrar()" class="login_button">Criar conta</button>
                 </div>
             </div>
@@ -118,6 +120,9 @@
                 </div>
                 <span id="span_nome_jogador4" class="nome_jogador">C</span>
             </div>
+            <div id="div_gerador" class="oculto" onclick="gerarEstatisticas()">
+                <span>Gerar estatísticas</span>
+            </div>
             <div id="container_enviar_time" onclick="salvarTime()">
                 <div id="div_icon_enviar_time">
                     <img src="./assets/img/icon_seta.png" id="icon_seta">
@@ -141,18 +146,11 @@
 
 </html>
 
-<script>
-</script>
-
-<!-- JS PARA TELA DE LOGIN E CADASTRO -->
 <script src="./js/loginCadastro.js"></script>
-
-<!-- JS PARA MONTAGEM DE TIME -->
 <script src="./js/funcMensagem.js"></script>
 <script src="./js/funcMercadoJogadores.js"></script>
 <script src="./js/funcTimeUser.js"></script>
-
-<!-- JS PARA SUBSTITUIR CSS -->
 <script src="./js/efeitosCSS.js"></script>
+<script src="./js/gerarEstatisticas.js"></script>
 
 <body onload="mostrarLogin(), obterRodada(), obterJogadores()">

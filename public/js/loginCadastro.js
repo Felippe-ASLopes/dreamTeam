@@ -4,7 +4,8 @@ function login() {
     const senhaVar = input_login_senha.value;
 
     if (emailVar == "" || senhaVar == "") {
-        alert('Preencha todos os campos para realizar o login!');
+        div_erro_login.innerHTML = `
+        Preencha todos os campos para realizar o login!`
         return false;
     }
     fetch("/usuarios/autenticar", {
@@ -21,18 +22,22 @@ function login() {
             console.log(resposta);
 
             resposta.json().then(json => {
-                console.log(json);
+                console.log('Usuario:', json);
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
-                carregarTimeUser()
+                obterTimeUsuario()
                 fecharlogin()
+                if (sessionStorage.ID_USUARIO == 1) [
+                    exibirGerador()
+                ]
             });
 
         } else {
 
-            console.log("Houve um erro ao tentar realizar o login!");
+            div_erro_login.innerHTML = `
+            As credenciais estão incorretas, tente novamente!`
 
             resposta.text().then(texto => {
                 console.error(texto);
@@ -53,10 +58,10 @@ function cadastrar() {
     const confirmacaoSenhaVar = input_confirmacao_senha.value;
 
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-        alert('Preencha todos os campos para realizar o cadastro!');
+        div_erro_cadastro.innerHTML = `Preencha todos os campos para realizar o cadastro!`
         return false;
     } else if (confirmacaoSenhaVar != senhaVar) {
-        alert('Os campos Senha e Confirmação de Senha devem ser iguais para realizar o cadastro!')
+        div_erro_cadastro.innerHTML = `Os campos Senha e Confirmação de Senha devem ser iguais para realizar o cadastro!`
         return false;
     }
 
@@ -75,11 +80,8 @@ function cadastrar() {
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
-                mostrarLogin()
-                //   setTimeout(() => {
-                //     window.location = "login.html";
-                //   }, "2000");
+                div_erro_cadastro.innerHTML = `<span style="color: #007A33;">Cadastro realizado com sucesso!</span>`
+                setTimeout(mostrarLogin, 600)
 
                 //   limparFormulario();
             } else {
