@@ -16,4 +16,8 @@ router.post("/inserirTime", function (req, res) {
     usuarioController.inserirTime(req, res);
 });
 
+router.put("/atualizarTime", function (req, res) {
+    usuarioController.atualizarTime(req, res);
+});
+
 module.exports = router;

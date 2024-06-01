@@ -33,12 +33,12 @@ function exibirJogadores() {
         const sobrenome = jogador.sobrenome;
         const posicao = jogador.sigla;
         const valor = Number(jogador.preco);
-        const img = jogador.img
+        const img = jogador.urlImagem
 
         container_jogadores_mercado.innerHTML += `
             <div id="mercado_jogador${idJogador}" class="container_jogador_mercado" draggable="true">
                 <div class="div_img_jogador">
-                    <img src="" class="img_jogador">
+                    <img src="${img}" class="img_jogador">
                 </div>
                 <div class="container_info_jogador">
                     <div class="div_nome_jogador">

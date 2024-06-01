@@ -87,8 +87,23 @@ function inserirTime(req, res) {
             res.status(500).json(erro.sqlMessage);
         });
 }
+
+function atualizarTime(req, res) {
+    const { idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor } = req.body;
+
+        usuarioModel.atualizarTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor)
+            .then(result => {
+                res.status(200).send("Time atualizado com sucesso!");
+            })
+            .catch(erro => {
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    inserirTime
+    inserirTime,
+    atualizarTime
 }

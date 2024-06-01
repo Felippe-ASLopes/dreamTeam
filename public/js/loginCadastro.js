@@ -7,9 +7,6 @@ function login() {
         alert('Preencha todos os campos para realizar o login!');
         return false;
     }
-    else {
-        // setInterval(sumirMensagem, 5000)
-    }
     fetch("/usuarios/autenticar", {
         method: "POST",
         headers: {
@@ -31,10 +28,6 @@ function login() {
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
                 carregarTimeUser()
                 fecharlogin()
-
-                // setTimeout(function () {
-                // }, 1000); // apenas para exibir o loading
-
             });
 
         } else {
@@ -65,8 +58,6 @@ function cadastrar() {
     } else if (confirmacaoSenhaVar != senhaVar) {
         alert('Os campos Senha e Confirmação de Senha devem ser iguais para realizar o cadastro!')
         return false;
-    } else {
-        //   setInterval(sumirMensagem, 5000);
     }
 
     fetch("/usuarios/cadastrar", {
@@ -108,7 +99,9 @@ function mostrarLogin() {
     container_login.classList.remove('oculto')
     container_cadastro.classList.add('oculto')
     span_login.style.fontSize = '2.5vw'
+    span_login.style.color = '#ffffff'
     span_cadastro.style.fontSize = '2vw'
+    span_cadastro.style.color = '#646464'
     document.title = 'Login - Dream Team'
 }
 
@@ -117,13 +110,16 @@ function mostrarCadastro() {
     container_login.classList.add('oculto')
     container_cadastro.classList.remove('oculto')
     span_login.style.fontSize = '2vw'
+    span_login.style.color = '#646464'
     span_cadastro.style.fontSize = '2.3vw'
+    span_cadastro.style.color = '#ffffff'
     document.title = 'Cadastro - Dream Team'
 }
 
 function fecharlogin() {
     main_time.classList.remove('blur')
+    container_mensagens.classList.remove('oculto')
     container_login_cadastro.style.display = 'none'
-    alert(`logado com sucesso`)
     document.title = 'Dream Team - Monte seu time'
+    avisoLogin()
 }

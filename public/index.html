@@ -49,6 +49,9 @@
         <div id="mensagem_cadastro"></div>
     </div>
 
+    <!-- PAINEL MENSAGENS -->
+    <div id="container_mensagens" class="oculto"></div>
+
     <!-- MONTAGEM DE TIME -->
     <!-- PARTE DA ESQUERDA, INFO DO USER -->
     <main id="main_time">
@@ -145,10 +148,11 @@
 <script src="./js/loginCadastro.js"></script>
 
 <!-- JS PARA MONTAGEM DE TIME -->
+<script src="./js/funcMensagem.js"></script>
 <script src="./js/funcMercadoJogadores.js"></script>
 <script src="./js/funcTimeUser.js"></script>
 
 <!-- JS PARA SUBSTITUIR CSS -->
 <script src="./js/efeitosCSS.js"></script>
 
-<body onload="mostrarLogin(), obterJogadores()">
+<body onload="mostrarLogin(), obterRodada(), obterJogadores()">

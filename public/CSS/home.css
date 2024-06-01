@@ -23,16 +23,19 @@ body {
 
 /* TELA DE LOGIN/CADASTRO */
 #container_login_cadastro {
-    width: 60vw;
-    height: 70vh;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     position: absolute;
     z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #mensagem_login {
-    width: 40%;
-    height: 100%;
+    width: 20%;
+    height: 75%;
     background-color: blueviolet;
     display: flex;
     justify-content: flex-start;
@@ -51,8 +54,8 @@ body {
 }
 
 #index_login {
-    width: 60%;
-    height: 100%;
+    width: 35%;
+    height: 75%;
     display: flex;
     border-radius: 0px 20px 20px 0px;
     justify-content: flex-start;
@@ -82,7 +85,8 @@ body {
     cursor: pointer;
 }
 
-#login > span, #cadastro span {
+#login>span,
+#cadastro> span {
     font-size: 2vw;
     font-weight: 100;
     transition: 0.25s;
@@ -95,8 +99,6 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: 1vw;
-    transition: 0.25s;
 }
 
 #container_login {
@@ -105,12 +107,13 @@ body {
     margin: 1vw;
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    font-size: 1.2vw;
+    font-weight: 100;
 }
 
 .input_formulario {
     width: 90%;
-    height: 10%;
+    height: 5vh;
     background: none;
     border-top: none;
     border-left: none;
@@ -134,17 +137,20 @@ body {
     height: 5vh;
     border-radius: 5px;
     font-family: gliker;
-    font-size: 1.5em;
+    font-size: 1.5vw;
+    margin-top: 3vh;
 }
 
 #container_cadastro {
     width: 90%;
     height: 90%;
-    margin: 1vw;
+    margin-left: 1vw;
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    font-size: 1.2vw;
+    font-weight: 100;
 }
+
 
 /* MONTAGEM DE TIME */
 main {
@@ -160,7 +166,7 @@ main {
 
 aside {
     width: 23.7vw;
-    height: 90vh;
+    height: 95vh;
     background-color: #0077C0;
     border-radius: 20px;
     display: flex;
@@ -170,10 +176,29 @@ aside {
     color: #ffffff;
 }
 
+/* PAINEL MENSAGENS */
+#container_mensagens {
+    width: 30vw;
+    height: 10vh;
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #0077C0;
+    bottom: 90vh;
+    border-radius: 0px 0px 10px 10px;
+    border: solid #ffffff;
+    font-family: gliker;
+    font-size: 1.2vw;
+    transition: 0.5s;
+}
+
 /* PARTE ESQUERDA, INFO DO USUARIO */
 #info_user {
     width: 100%;
-    height: 20.3%;
+    height: 15%;
     border-bottom: solid #0000004b;
     display: flex;
     flex-direction: column;
@@ -209,7 +234,7 @@ aside {
 
 .div_jogador {
     width: 100%;
-    height: 15.5%;
+    height: 16.6%;
     border-bottom: solid #0000004b;
     display: flex;
     justify-content: center;
@@ -227,8 +252,8 @@ aside {
 }
 
 .background_remove {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,13 +263,13 @@ aside {
 
 .icon_minus {
     width: 80%;
-    height: 100%;
+    height: 120%;
 }
 
 /* PARTE DO MEIO, QUADRA */
 #div_quadra {
     width: 51vw;
-    height: 90vh;
+    height: 95vh;
     display: flex;
     background-image: url(../assets/img/quadraBasquete.jpg);
     background-position: center center;
@@ -275,6 +300,7 @@ aside {
     justify-content: center;
     align-items: center;
     transition: 0.25s;
+    overflow: hidden;
 }
 
 .icon_plus {
@@ -283,27 +309,27 @@ aside {
 }
 
 #div_jogador0 {
-    left: 45%;
+    left: 44.8%;
     top: 81%;
 }
 
 #div_jogador1 {
-    top: 66%;
+    top: 68%;
 }
 
 #div_jogador2 {
-    left: 68%;
-    top: 56%;
+    left: 60%;
+    top: 68%;
 }
 
 #div_jogador3 {
-    top: 35%;
-    left: 41.7%;
+    top: 25%;
+    left: 41%;
 }
 
 #div_jogador4 {
     top: 25%;
-    right: 18%;
+    right: 20%;
 }
 
 .nome_jogador {
@@ -320,9 +346,9 @@ aside {
 }
 
 .ajustar_foto_jogador {
-    width: 5vw;
+    width: 8vw;
     height: 10vh;
-    border-radius: 50%;
+    object-fit: contain;
 }
 
 .add_jogador_hover {
@@ -330,7 +356,7 @@ aside {
 }
 
 .add_img_jogador_hover {
-    background-color: #0a0a0a;
+    background-color: #0a0a0aaf;
 }
 
 .nome_jogador_hover {
@@ -421,7 +447,7 @@ aside {
 
 .container_jogador_mercado {
     width: 100%;
-    min-height: 15.5%;
+    min-height: 16.6%;
     display: flex;
     border-bottom: solid #0000004b;
     flex-direction: row;
@@ -433,17 +459,21 @@ aside {
 }
 
 .div_img_jogador {
+    width: 6vw;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_jogador {
     width: 10vw;
     height: 100%;
 }
 
-.img_jogador {
-    width: 100%;
-    height: 100%;
-}
-
 .container_info_jogador {
-    width: 55%;
+    width: 74%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -456,11 +486,12 @@ aside {
 
 .div_nome_jogador {
     width: 100%;
-    height: 50%;
+    height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1vw;
+    word-break: break-all;
 }
 
 .div_valor_add {
@@ -477,11 +508,12 @@ aside {
     gap: 1vh;
     justify-content: center;
     align-items: center;
+    word-break: break-all;
 }
 
 .background_add {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -496,6 +528,6 @@ aside {
     height: 15vh !important;
 }
 
-.dragging > .div_info_jogador {
+.dragging>.div_info_jogador {
     display: none !important;
 }

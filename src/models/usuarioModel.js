@@ -26,8 +26,27 @@ function inserirTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5
     return database.executar(instrucaoSql);
 }
 
+function atualizarTime(idUsuario, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
+    var instrucaoSql = `
+        UPDATE timeUsuario SET 
+            fkJogador1 = ${jogador1}, 
+            fkJogador2 = ${jogador2}, 
+            fkJogador3 = ${jogador3}, 
+            fkJogador4 = ${jogador4}, 
+            fkJogador5 = ${jogador5},
+            valor = ${valor}
+        WHERE 
+            fkUsuario = ${idUsuario} AND 
+            fkRodada = 1;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    inserirTime
+    inserirTime,
+    atualizarTime
 };

@@ -2,6 +2,7 @@ const timeUser = ['', '', '', '', '']
 let dinheiroUser = 0
 let valorTime = 0
 let dinheiroRestante = 0
+let timePodeInserir = true
 
 function carregarTimeUser() {
     dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
@@ -26,16 +27,19 @@ function atualizarDinheiroUser() {
 function addJogador() {
     const elemento = event.target.closest('.background_add');
     const idJogadorAdd = elemento.id;
-    const nomeJogadorAdd = jogadores[idJogadorAdd - 1].nomeJogador
-    const sobrenomeJogadorAdd = jogadores[idJogadorAdd - 1].sobrenome
-    const posicaoJogadorAdd = jogadores[idJogadorAdd - 1].sigla
     const valorJogadorAdd = Number(jogadores[idJogadorAdd - 1].preco)
-
+    
     if (valorJogadorAdd > dinheiroRestante) {
         alert('Dinheiro insuficiente')
     }
     else {
-        if ((posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') && (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
+        const nomeJogadorAdd = jogadores[idJogadorAdd - 1].nomeJogador
+        const sobrenomeJogadorAdd = jogadores[idJogadorAdd - 1].sobrenome
+        const posicaoJogadorAdd = jogadores[idJogadorAdd - 1].sigla
+        const imgJogadorAdd = jogadores[idJogadorAdd - 1].urlImagem
+        
+        if ((posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') && 
+        (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
             for (let posicao = 0; posicao <= 2; posicao++) {
                 if (timeUser[posicao] == '') {
                     // ATUALIZA O VETOR timeUser
@@ -45,12 +49,12 @@ function addJogador() {
                     valorTime += valorJogadorAdd
                     atualizarDinheiroUser()
 
-                    // ADD NO TIMEUSER
+                    // ADICIONA NO TIMEUSER
                     const divAlterarTime = document.getElementById(`jogador${posicao}`)
 
                     divAlterarTime.innerHTML = `
                     <div class="div_img_jogador">
-                        <img src="" class="img_jogador">
+                        <img src="${imgJogadorAdd}" class="img_jogador">
                     </div>
                     <div class="container_info_jogador">
                         <div class="div_nome_jogador">
@@ -73,17 +77,17 @@ function addJogador() {
                         </div>
                     </div>`
 
-                    // ADD NO CAMPO
-                    // const imgAlterar = document.getElementById(`img_jogador${i}`)
-                    // imgAlterar.src = listaFotoJogadores[idJogadorAdd]
-                    // imgAlterar.classList.remove('icon_plus')
-                    // imgAlterar.classList.add('ajustar_foto_jogador')
+                    // ADICIONA NO CAMPO
+                    const imgAlterar = document.getElementById(`img_jogador${posicao}`)
+                    imgAlterar.src = imgJogadorAdd
+                    imgAlterar.classList.remove('icon_plus')
+                    imgAlterar.classList.add('ajustar_foto_jogador')
 
                     const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
                     spanAlterar.innerHTML = `${nomeJogadorAdd} ${sobrenomeJogadorAdd}`
 
 
-                    // REMOVER DO MERCADO
+                    // REMOVE DO MERCADO
                     const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
                     divAlterarMercado.style.display = 'none'
 
@@ -101,12 +105,12 @@ function addJogador() {
                     valorTime += valorJogadorAdd
                     atualizarDinheiroUser()
 
-                    // ADD NO TIMEUSER
+                    // ADICIONA NO TIMEUSER
                     const divAlterarTime = document.getElementById(`jogador${posicao}`)
 
                     divAlterarTime.innerHTML = `
                     <div class="div_img_jogador">
-                        <img src="" class="img_jogador">
+                        <img src="${imgJogadorAdd}" class="img_jogador">
                     </div>
                     <div class="container_info_jogador">
                         <div class="div_nome_jogador">
@@ -129,17 +133,17 @@ function addJogador() {
                         </div>
                     </div>`
 
-                    // ADD NO CAMPO
-                    // const imgAlterar = document.getElementById(`img_jogador${i}`)
-                    // imgAlterar.src = listaFotoJogadores[idJogadorAdd]
-                    // imgAlterar.classList.remove('icon_plus')
-                    // imgAlterar.classList.add('ajustar_foto_jogador')
+                    // ADICIONA NO CAMPO
+                    const imgAlterar = document.getElementById(`img_jogador${posicao}`)
+                    imgAlterar.src = imgJogadorAdd
+                    imgAlterar.classList.remove('icon_plus')
+                    imgAlterar.classList.add('ajustar_foto_jogador')
 
                     const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
                     spanAlterar.innerHTML = `${nomeJogadorAdd} ${sobrenomeJogadorAdd}`
 
 
-                    // REMOVER DO MERCADO
+                    // REMOVE DO MERCADO
                     const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
                     divAlterarMercado.style.display = 'none'
 
@@ -202,16 +206,64 @@ function removerJogador(idJogadorAdd) {
 }
 
 function salvarTime() {
+    if (timePodeInserir) {
+        timePodeInserir = false
+        const idUsuario = sessionStorage.ID_USUARIO
+        const jogador1 = timeUser[0]
+        const jogador2 = timeUser[1]
+        const jogador3 = timeUser[2]
+        const jogador4 = timeUser[3]
+        const jogador5 = timeUser[4]
+        const valor = valorTime
+    
+        fetch("/usuarios/inserirTime", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+                jogador1: jogador1,
+                jogador2: jogador2,
+                jogador3: jogador3,
+                jogador4: jogador4,
+                jogador5: jogador5,
+                valor: valor
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                console.log("Time inserido com sucesso!");
+                
+                div_text_enviar_time.innerHTML = `
+                <span>Atualizar Time</span>
+                `
+            } else {
+                console.log("Houve um erro ao tentar inserir o time!");
+    
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        }).catch(function (erro) {
+            console.log("Erro na requisição:", erro);
+        });
+    }
+    else {
+        atualizarTime()
+    }
+}
+
+function atualizarTime() {
     const idUsuario = sessionStorage.ID_USUARIO
-    // const dinheiroRestanteUsuario = dinheiroRestante PARA DAR UPDATE NO DINHEIRO
     const jogador1 = timeUser[0]
     const jogador2 = timeUser[1]
     const jogador3 = timeUser[2]
     const jogador4 = timeUser[3]
     const jogador5 = timeUser[4]
+    const valor = valorTime
 
-    fetch("/usuarios/inserirTime", {
-        method: "POST",
+    fetch("/usuarios/atualizarTime", {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
@@ -222,13 +274,13 @@ function salvarTime() {
             jogador3: jogador3,
             jogador4: jogador4,
             jogador5: jogador5,
-            valor: valorTime
+            valor: valor
         })
     }).then(function (resposta) {
         if (resposta.ok) {
-            console.log("Time inserido com sucesso!");
+            console.log("Time atualizado com sucesso!");
         } else {
-            console.log("Houve um erro ao tentar inserir o time!");
+            console.log("Houve um erro ao tentar atualizar o time!");
 
             resposta.text().then(texto => {
                 console.error(texto);

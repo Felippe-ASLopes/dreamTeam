@@ -131,7 +131,8 @@ concat(j1.nomeJogador, ' ', j1.sobrenome) as 'PG',
 concat(j2.nomeJogador, ' ', j2.sobrenome) as 'SG', 
 concat(j3.nomeJogador, ' ', j3.sobrenome) as 'SF', 
 concat(j4.nomeJogador, ' ', j4.sobrenome) as 'PF', 
-concat(j5.nomeJogador, ' ', j5.sobrenome) as 'C' 
+concat(j5.nomeJogador, ' ', j5.sobrenome) as 'C',
+valor 
 from timeUsuario
 join usuario on fkusuario = idUsuario
 join rodada on fkRodada
@@ -141,6 +142,8 @@ join jogador as j3 on fkJogador3 = j3.idJogador
 join jogador as j4 on fkJogador4 = j4.idJogador
 join jogador as j5 on fkJogador5 = j5.idJogador;
 
+select idRodada, date(inicio) as 'dataInicio', time(inicio) as 'horaInicio', date(fim) as 'dataFim', time(fim) as 'horaFim' from rodada;
+
 -- COMANDOS PARA TESTE --
 -- update usuario set dinheiro = 999.99 where idUsuario = 1; --
--- truncate table timeUsuario; --
+truncate table timeUsuario;
