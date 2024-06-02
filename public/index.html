@@ -123,6 +123,9 @@
             <div id="div_gerador" class="oculto" onclick="gerarEstatisticas()">
                 <span>Gerar estatísticas</span>
             </div>
+            <div id="div_controle" class="oculto" onclick="controlarMercado()">
+                <span>Fechar Mercado</span>
+            </div>
             <div id="container_enviar_time" onclick="salvarTime()">
                 <div id="div_icon_enviar_time">
                     <img src="./assets/img/icon_seta.png" id="icon_seta">
@@ -147,10 +150,12 @@
 </html>
 
 <script src="./js/loginCadastro.js"></script>
-<script src="./js/funcMensagem.js"></script>
+<script src="./js/funcRodada.js"></script>
 <script src="./js/funcMercadoJogadores.js"></script>
+<script src="./js/funcPontuacao.js"></script>
 <script src="./js/funcTimeUser.js"></script>
+<script src="./js/funcMensagem.js"></script>
 <script src="./js/efeitosCSS.js"></script>
 <script src="./js/gerarEstatisticas.js"></script>
 
-<body onload="mostrarLogin(), obterRodada(), obterJogadores()">
+<body onload="obterRodada(), obterEstatistica(), obterJogadores(), mostrarLogin(), verificarHorario()">

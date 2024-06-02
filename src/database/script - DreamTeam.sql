@@ -115,10 +115,10 @@ insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco, urlImagem
 (7, 'Stephen', 'Curry', 1, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254');
 
 insert into rodada values
-(default, '2024-06-01 10:00:01', '2024-12-30 23:59:59');
+(default, '2024-06-01 23:43:40', '2024-06-01 23:44:40');
 
 insert into partida values
-(default, 4, 1, 2);
+(default, 1, 1, 2);
 
 select * from usuario;
 select * from jogador;
@@ -146,13 +146,17 @@ join jogador as j1 on fkJogador1 = j1.idJogador
 join jogador as j2 on fkJogador2 = j2.idJogador
 join jogador as j3 on fkJogador3 = j3.idJogador
 join jogador as j4 on fkJogador4 = j4.idJogador
-join jogador as j5 on fkJogador5 = j5.idJogador;
+join jogador as j5 on fkJogador5 = j5.idJogador
+WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario);
 
 select idRodada, date(inicio) as 'dataInicio', time(inicio) as 'horaInicio', date(fim) as 'dataFim', time(fim) as 'horaFim' from rodada;
 
 SELECT * FROM timeUsuario
 WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario);
 
+SELECT fkPartida, concat(nomeJogador, ' ', sobrenome) as 'Nome jogador', ponto, assistencia, rebote, bloqueio, roubo, turnOver, falta FROM estatistica
+join jogador on fkJogador = idJogador
+WHERE fkPartida = (SELECT MAX(fkPartida) FROM estatistica);
+
 -- COMANDOS PARA TESTE --
--- update usuario set dinheiro = 999.99 where idUsuario = 1; --
-truncate table timeUsuario;
+-- update usuario set dinheiro = 500 where idUsuario = 1; --

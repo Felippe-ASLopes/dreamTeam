@@ -440,7 +440,24 @@ aside {
     color: #ffffff;
 }
 
-#div_gerador:hover {
+#div_controle {
+    width: 8vw;
+    height: 7vh;
+    background-color: #98002E;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 0;
+    left: 67.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 5px #000000be;
+    transition: 0.25s;
+    color: #ffffff;
+}
+
+#div_gerador:hover,
+#div_controle:hover {
     transform: scale(1.05);
     box-shadow: 3px 3px 10px #000000be;
 }
@@ -535,7 +552,7 @@ aside {
 }
 
 .div_info_jogador {
-    width: 33.3%;
+    width: 35%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -543,11 +560,20 @@ aside {
     justify-content: center;
     align-items: center;
     word-break: break-all;
+    text-align: center;
+}
+
+.div_add_jogador {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .background_add {
-    width: 60%;
-    height: 60%;
+    width: 70%;
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;

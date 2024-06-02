@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
-var estatisticaController = require("../controllers/estatisticaController");
+var geradorController = require("../controllers/geradorController");
 
 router.post("/inserir", function (req, res) {
-    estatisticaController.inserir(req, res);
+    geradorController.inserir(req, res);
 });
 
 module.exports = router;

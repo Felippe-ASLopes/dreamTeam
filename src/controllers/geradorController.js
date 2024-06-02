@@ -1,4 +1,4 @@
-var estatisticaModel = require("../models/estatisticaModel");
+var estatisticaModel = require("../models/geradorModel");
 
 function inserir(req, res) {
     var comandoInsert = req.body.comandoInsert;

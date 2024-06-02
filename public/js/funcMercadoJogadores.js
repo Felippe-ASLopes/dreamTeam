@@ -26,33 +26,34 @@ function obterJogadores() {
 }
 
 function exibirJogadores() {
-    jogadores.forEach((jogador) => {
-        const idJogador = jogador.idJogador
-        const nome = jogador.nomeJogador
-        const sobrenome = jogador.sobrenome
-        const posicao = jogador.sigla
-        const valor = Number(jogador.preco)
-        const img = jogador.urlImagem
+    for (let posicao = 0; posicao < jogadores.length; posicao++) {
+        const idJogador = jogadores[posicao].idJogador
+        const nome = jogadores[posicao].nomeJogador
+        const sobrenome = jogadores[posicao].sobrenome
+        const posicaoJogador = jogadores[posicao].sigla
+        const valor = Number(jogadores[posicao].preco)
+        const img = jogadores[posicao].urlImagem
+        const pontosJogador = pontuacao[posicao]
 
         container_jogadores_mercado.innerHTML += `
-            <div id="mercado_jogador${idJogador}" class="container_jogador_mercado" draggable="true">
+            <div id="mercado_jogador${idJogador}" class="container_jogador_mercado">
                 <div class="div_img_jogador">
                     <img src="${img}" class="img_jogador">
                 </div>
                 <div class="container_info_jogador">
                     <div class="div_nome_jogador">
-                        <span>${nome} ${sobrenome}</span>
+                        <span>${nome} ${sobrenome} - ${posicaoJogador}</span>
                     </div>
                     <div class="div_valor_add">
                         <div class="div_info_jogador">
-                            <span>Posicao:</span>
-                            <span>${posicao}</span>
+                            <span>Ultima<br>pontuação:</span>
+                            <span>${pontosJogador}</span>
                         </div>
                         <div class="div_info_jogador">
                             <span>Valor:</span>
                             <span>$ ${valor}</span>
                         </div>
-                        <div class="div_info_jogador">
+                        <div class="div_add_jogador">
                             <div id="${idJogador}" class="background_add" onclick="addJogador(${idJogador})">
                                 <img src="./assets/img/icon_plus.png" class="icon_plus">
                             </div>
@@ -60,5 +61,5 @@ function exibirJogadores() {
                     </div>
                 </div>
             </div>`;
-    });
+    }
 }

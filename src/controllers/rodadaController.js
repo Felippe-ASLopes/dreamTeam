@@ -11,6 +11,18 @@ function obterRodada(req, res) {
         });
 }
 
+function obterEstatistica(req, res) {
+    rodadaModel.obterEstatistica()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
-    obterRodada
+    obterRodada,
+    obterEstatistica
 };

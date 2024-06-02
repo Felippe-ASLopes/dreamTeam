@@ -82,8 +82,6 @@ function cadastrar() {
             if (resposta.ok) {
                 div_erro_cadastro.innerHTML = `<span style="color: #007A33;">Cadastro realizado com sucesso!</span>`
                 setTimeout(mostrarLogin, 600)
-
-                //   limparFormulario();
             } else {
                 throw "Houve um erro ao tentar realizar o cadastro!";
             }
