@@ -46,9 +46,20 @@ function atualizarPontuacaoUser(req, res) {
 
 function atualizarDinheiroUser(req, res) {
     var idUsuario = req.body.idUsuario;
-    var dinheiro = req.body.dinheiro;
+    var comandoUpdate = req.body.comandoUpdate;
 
-    adminModel.atualizarDinheiroUser(idUsuario, dinheiro)
+    adminModel.atualizarDinheiroUser(idUsuario, comandoUpdate)
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function novaRodada(req, res) {
+    adminModel.novaRodada()
         .then(result => {
             res.status(200).json(result);
         })
@@ -62,5 +73,6 @@ module.exports = {
     inserir,
     obterTodosTimesUsuario,
     atualizarPontuacaoUser,
-    atualizarDinheiroUser
+    atualizarDinheiroUser,
+    novaRodada
 };

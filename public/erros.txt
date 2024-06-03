@@ -1,9 +1,5 @@
 ERROS:
--dinheiroUser nao atualiza nem no banco
-- valor do time nao apaga
--pontuação undefined time user - funcao nao é executada
-- nao atualiza depois de gerar estatisticas - nao executa funcao
--valor nao é inserido
+-dinheiroUser nao atualiza em timeUser - falta chamar func
 
 OK:
 -pontuação nao atualiza ao abrir o mercardo chega nan- ok

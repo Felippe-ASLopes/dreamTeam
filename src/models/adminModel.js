@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function inserir(comandoInsert) {
-    var instrucaoSql = `INSERT INTO estatistica VALUES ${comandoInsert}`;
+    var instrucaoSql = `INSERT INTO estatistica VALUES ${comandoInsert};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -28,12 +28,20 @@ function atualizarPontuacaoUser(fkUsuario, pontuacao, rodada) {
     return database.executar(instrucaoSql);
 }
 
-function atualizarDinheiroUser(idUsuario, dinheiro) {
+function atualizarDinheiroUser(idUsuario, comandoUpdate) {
     var instrucaoSql = `
         UPDATE usuario
-        SET dinheiro = ${dinheiro}
+        SET dinheiro = dinheiro ${comandoUpdate}
         WHERE idUsuario = ${idUsuario};
     `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function novaRodada() {
+    var instrucaoSql = `INSERT INTO rodada VALUES
+    (DEFAULT, '2024-06-03 23:59:59', '2024-06-04 00:00:00');`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -43,5 +51,6 @@ module.exports = {
     inserir,
     obterTodosTimesUsuario,
     atualizarPontuacaoUser,
-    atualizarDinheiroUser
+    atualizarDinheiroUser,
+    novaRodada
 };

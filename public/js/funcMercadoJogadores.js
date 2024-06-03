@@ -29,6 +29,7 @@ function obterJogadores() {
 }
 
 function exibirJogadores() {
+    // console.log('jogadores sendo exibidos')
     container_jogadores_mercado.innerHTML = ''
     let pontosJogador = 0
     for (let posicao = 0; posicao < jogadores.length; posicao++) {

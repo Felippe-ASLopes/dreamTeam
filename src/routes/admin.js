@@ -19,4 +19,8 @@ router.put("/atualizarDinheiroUser", function (req, res) {
     adminController.atualizarDinheiroUser(req, res);
 });
 
+router.post("/novaRodada", function (req, res) {
+    adminController.novaRodada(req, res);
+});
+
 module.exports = router;

@@ -27,36 +27,43 @@ function obterEstatistica() {
 }
 
 function calcularPontuacao() {
-    pontuacao.splice(0, pontuacao.length)
-    estatisticas.forEach(estatistica => {
-        const jogador = estatistica.fkJogador
-        const pontos = estatistica.ponto
-        const assistencias = estatistica.assistencia
-        const rebotes = estatistica.rebote
-        const bloqueios = estatistica.bloqueio
-        const roubos = estatistica.roubo
-        const turnOvers = estatistica.turnOver
-        const faltas = estatistica.falta
-        const listaEstatisticas = [pontos, assistencias, rebotes, bloqueios, roubos]
-        let atributosAcimaDe10 = 0
+    if (podeCalcular) {
+        podeCalcular = false
 
-        listaEstatisticas.forEach(posicaoEstatistica => {
-            if (posicaoEstatistica >= 10) {
-                atributosAcimaDe10++
-            }
+        pontuacao.splice(0, pontuacao.length)
+        estatisticas.forEach(estatistica => {
+            const jogador = estatistica.fkJogador
+            const pontos = estatistica.ponto
+            const assistencias = estatistica.assistencia
+            const rebotes = estatistica.rebote
+            const bloqueios = estatistica.bloqueio
+            const roubos = estatistica.roubo
+            const turnOvers = estatistica.turnOver
+            const faltas = estatistica.falta
+            const listaEstatisticas = [pontos, assistencias, rebotes, bloqueios, roubos]
+            let atributosAcimaDe10 = 0
+    
+            listaEstatisticas.forEach(posicaoEstatistica => {
+                if (posicaoEstatistica >= 10) {
+                    atributosAcimaDe10++
+                }
+            });
+    
+            const calculoPontuacao = (pontos + (assistencias * 0.75) + (rebotes * 0.5) + (bloqueios * 0.75) + (roubos * 0.5) - turnOvers - (faltas * 0.5))
+            const bonus = atributosAcimaDe10 * 2
+            const totalPontuacao = calculoPontuacao + bonus
+            // console.log('pontuacao:', jogador, totalPontuacao)
+            pontuacao.push({
+                idJogador: jogador,
+                pontos: totalPontuacao
+            })
         });
-
-        const calculoPontuacao = (pontos + (assistencias * 0.75) + (rebotes * 0.5) + (bloqueios * 0.75) + (roubos * 0.5) - turnOvers - (faltas * 0.5))
-        const bonus = atributosAcimaDe10 * 2
-        const totalPontuacao = calculoPontuacao + bonus
-        console.log(jogador, totalPontuacao)
-        pontuacao.push({
-            idJogador: jogador,
-            pontos: totalPontuacao
-        })
-    });
-    console.log('Ultima pontuação:', pontuacao)
-    atualizarPontuacaoJogadores()
+        // console.log('Ultima pontuação:', pontuacao)
+        atualizarPontuacaoJogadores()
+    }
+    else {
+        obterJogadores()
+    }
 }
 
 function atualizarPontuacaoJogadores() {
@@ -76,7 +83,7 @@ function atualizarPontuacaoJogadores() {
         }).then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(json => {
-                    console.log("Pontuação do jogador atualizada:", json);
+                    // console.log("Pontuação do jogador atualizada:", json);
                 });
             } else {
                 console.log("Houve um erro ao tentar atualizar a pontuação do jogador!");
@@ -89,6 +96,7 @@ function atualizarPontuacaoJogadores() {
             console.log("Erro na requisição:", erro);
         });
     }
+    console.log("Pontuação dos jogadores atualizada:");
     obterValoresJogadores()
 }
 
@@ -124,23 +132,29 @@ function calcularPreco() {
             const pontuacaoParaValorizar = (valorJogador * 1.5).toFixed(2)
             const pontuacaoParaDesvalorizar = (valorJogador * 0.75).toFixed(2)
             let valor = 0
+            let acao = 'Manteve'
 
             if (pontuacaoRodada > pontuacaoParaValorizar) {
                 valor = Number(((pontuacaoRodada - pontuacaoParaValorizar) / 2).toFixed(2))
+                acao = 'Valorizou'
                 valorizacao.push({
+                    acao: acao,
                     idJogador: valorJogadoresDesatualizados[posicao].idJogador,
-                    valor: `+ ${valor}`
+                    valor: valor
                 })
             }
             else if (pontuacaoRodada < pontuacaoParaDesvalorizar) {
                 valor = Number(((pontuacaoParaValorizar - pontuacaoRodada) / 2).toFixed(2))
+                acao = 'Desvalorizou'
                 valorizacao.push({
+                    acao: acao,
                     idJogador: valorJogadoresDesatualizados[posicao].idJogador,
-                    valor: `- ${valor}`
+                    valor: valor
                 })
             }
             else {
                 valorizacao.push({
+                    acao: acao,
                     idJogador: valorJogadoresDesatualizados[posicao].idJogador,
                     valor: valor
                 })
@@ -155,10 +169,18 @@ function calcularPreco() {
 function atualizarPrecoJogadores() {
     for (let posicao = 0; posicao < valorizacao.length; posicao++) {
         const jogador = valorizacao[posicao].idJogador
-        const comandoSql = valorizacao[posicao].valor
+        const acaoValor = valorizacao[posicao].acao
+        let comandoSql = valorizacao[posicao].valor
+
+        if (acaoValor == 'Valorizou') {
+            comandoSql = `+ ${valorizacao[posicao].valor}`
+        }
+        else if (acaoValor == 'Desvalorizou') {
+            comandoSql = `- ${valorizacao[posicao].valor}`
+        }
+        // console.log(comandoSql)
 
         if (comandoSql != 0) {
-            console.log(comandoSql)
             fetch("/jogadores/atualizarPreco", {
                 method: "PUT",
                 headers: {
@@ -171,7 +193,7 @@ function atualizarPrecoJogadores() {
             }).then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(json => {
-                        console.log("Preço do jogador atualizado com sucesso:", json);
+                        // console.log("Preço do jogador atualizado com sucesso:", jogador, comandoSql);
                     });
                 } else {
                     console.log("Houve um erro ao tentar atualizar o preço do jogador!");
@@ -196,13 +218,15 @@ function calcularPontuacaoUser() {
         const jogador3 = ultimostimesUser[time].fkJogador3
         const jogador4 = ultimostimesUser[time].fkJogador4
         const jogador5 = ultimostimesUser[time].fkJogador5
-        const pontuacaoJogador1 = Number(pontuacao[jogador1 - 1])
-        const pontuacaoJogador2 = Number(pontuacao[jogador2 - 1])
-        const pontuacaoJogador3 = Number(pontuacao[jogador3 - 1])
-        const pontuacaoJogador4 = Number(pontuacao[jogador4 - 1])
-        const pontuacaoJogador5 = Number(pontuacao[jogador5 - 1])
+        const pontuacaoJogador1 = Number(pontuacao[jogador1 - 1].pontos)
+        const pontuacaoJogador2 = Number(pontuacao[jogador2 - 1].pontos)
+        const pontuacaoJogador3 = Number(pontuacao[jogador3 - 1].pontos)
+        const pontuacaoJogador4 = Number(pontuacao[jogador4 - 1].pontos)
+        const pontuacaoJogador5 = Number(pontuacao[jogador5 - 1].pontos)
 
         ultimostimesUser[time].pontuacao = pontuacaoJogador1 + pontuacaoJogador2 + pontuacaoJogador3 + pontuacaoJogador4 + pontuacaoJogador5
+
+        // console.log('jogadores:', pontuacaoJogador1, pontuacaoJogador2, pontuacaoJogador3, pontuacaoJogador4, pontuacaoJogador5, 'usuario:', ultimostimesUser[time].pontuacao)
     }
     atualizarPontuacaoUser()
 }
@@ -226,7 +250,7 @@ function atualizarPontuacaoUser() {
         }).then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(json => {
-                    console.log("Pontuação do usuário atualizada:", json);
+                    // console.log("Pontuação do usuário atualizada:", json);
                 });
             } else {
                 console.log("Houve um erro ao tentar atualizar a pontuação do usuário!");
@@ -239,10 +263,12 @@ function atualizarPontuacaoUser() {
             console.log("Erro na requisição:", erro);
         });
     }
-    calcularDinheiroUser()
+    console.log("Pontuação dos usuários atualizada");
+
+    calcularDinheiroUsers()
 }
 
-function calcularDinheiroUser() {
+function calcularDinheiroUsers() {
     for (let time = 0; time < ultimostimesUser.length; time++) {
         const idUsuario = ultimostimesUser[time].fkUsuario
         const jogador1 = ultimostimesUser[time].fkJogador1
@@ -250,49 +276,90 @@ function calcularDinheiroUser() {
         const jogador3 = ultimostimesUser[time].fkJogador3
         const jogador4 = ultimostimesUser[time].fkJogador4
         const jogador5 = ultimostimesUser[time].fkJogador5
-        const valorJogador1 = valorizacao[jogador1 - 1].valor
-        const valorJogador2 = valorizacao[jogador2 - 1].valor
-        const valorJogador3 = valorizacao[jogador3 - 1].valor
-        const valorJogador4 = valorizacao[jogador4 - 1].valor
-        const valorJogador5 = valorizacao[jogador5 - 1].valor
+        const valorJogador1 = Number(valorizacao[jogador1 - 1].valor)
+        const valorJogador2 = Number(valorizacao[jogador2 - 1].valor)
+        const valorJogador3 = Number(valorizacao[jogador3 - 1].valor)
+        const valorJogador4 = Number(valorizacao[jogador4 - 1].valor)
+        const valorJogador5 = Number(valorizacao[jogador5 - 1].valor)
+        const acaoJogador1 = valorizacao[jogador1 - 1].acao
+        const acaoJogador2 = valorizacao[jogador2 - 1].acao
+        const acaoJogador3 = valorizacao[jogador3 - 1].acao
+        const acaoJogador4 = valorizacao[jogador4 - 1].acao
+        const acaoJogador5 = valorizacao[jogador5 - 1].acao
+        let dinheiroUserAtualizar = 0
+
+        const timeUserAtuzaliar = [{
+            acaoJogador: acaoJogador1,
+            valorJogador: valorJogador1
+        }, {
+            acaoJogador: acaoJogador2,
+            valorJogador: valorJogador2
+        }, {
+            acaoJogador: acaoJogador3,
+            valorJogador: valorJogador3
+        }, {
+            acaoJogador: acaoJogador4,
+            valorJogador: valorJogador4
+        }, {
+            acaoJogador: acaoJogador5,
+            valorJogador: valorJogador5
+        }]
+
+        timeUserAtuzaliar.forEach(i => {
+            if (i.acaoJogador == 'Valorizou') {
+                dinheiroUserAtualizar += i.valorJogador
+            }
+            else if (i.acaoJogador == 'Desvalorizou') {
+                dinheiroUserAtualizar -= i.valorJogador
+            }
+        });
 
         dinheiroTimesUsers.push({
             idUsuario: idUsuario,
-            dinheiro: (valorJogador1 + valorJogador2 + valorJogador3 + valorJogador4 + valorJogador5)
+            dinheiro: (dinheiroUserAtualizar).toFixed(2)
         })
     }
-    atualizarDinheiroUser()
+    console.log('Calculando o dinheiro dos user:', dinheiroTimesUsers)
+    atualizarDinheiroUsers()
 }
 
-function atualizarDinheiroUser() {
-    for (let time = 0; time < ultimostimesUser.length; time++) {
+function atualizarDinheiroUsers() {
+    for (let time = 0; time < dinheiroTimesUsers.length; time++) {
         const idUsuario = dinheiroTimesUsers[time].idUsuario
         const dinheiro = dinheiroTimesUsers[time].dinheiro
+        let comandoUpdate = `+ ${dinheiro}`
 
-        fetch("/admin/atualizarDinheiroUser", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                idUsuario: idUsuario,
-                dinheiro: dinheiro
-            })
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                resposta.json().then(json => {
-                    console.log("Dinheiro do usuário atualizado:", json);
-                });
-            } else {
-                console.log("Houve um erro ao tentar atualizar o dinheiro do usuário!");
+        if (dinheiro < 0) {
+            comandoUpdate = `${dinheiro}`
+        }
 
-                resposta.text().then(texto => {
-                    console.error(texto);
-                });
-            }
-        }).catch(function (erro) {
-            console.log("Erro na requisição:", erro);
-        });
+        if (dinheiro != 0) {
+            fetch("/admin/atualizarDinheiroUser", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuario: idUsuario,
+                    comandoUpdate: comandoUpdate
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        console.log("Dinheiro do usuário atualizado:", idUsuario, dinheiro);
+                    });
+                } else {
+                    console.log("Houve um erro ao tentar atualizar o dinheiro do usuário!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log("Erro na requisição:", erro);
+            });
+        }
     }
+    dinheiroTimesUsers.splice(0, dinheiroTimesUsers.length)
     obterTimeUsuario()
 }

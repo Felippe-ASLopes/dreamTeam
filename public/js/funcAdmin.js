@@ -2,6 +2,7 @@ let ultimostimesUser = []
 const dinheiroTimesUsers = []
 let comandoInsert = ``
 let comandoDoAdmin = false
+let podeCalcular = false
 
 function exibirGerador() {
     div_gerador.classList.remove('oculto')
@@ -51,7 +52,7 @@ function inserirEstatisticas() {
         body: JSON.stringify({ comandoInsert: comandoInsert })
     }).then(function (resposta) {
         if (resposta.ok) {
-            calcularPontuacao()
+            novaRodada()
             container_mensagens.style.backgroundColor = '#007A33'
             container_mensagens.innerHTML = `<span>Estatísticas inseridas com sucesso!</span>`
 
@@ -70,7 +71,34 @@ function inserirEstatisticas() {
     }).catch(function (erro) {
         console.log("Erro na requisição:", erro);
     });
+}
 
+function novaRodada() {
+    fetch("/admin/novaRodada", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+        })
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                // console.log("Nova rodada criada:", json);
+                podeCalcular = true
+                podeLimparTime = true
+                obterRodada()
+            });
+        } else {
+            console.log("Houve um erro ao tentar criar a nova rodada!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+    }).catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+    });
 }
 
 function controlarMercado() {
@@ -104,7 +132,7 @@ function obterTodosTimesUsuario() {
             resposta.json().then(jsonUltimoTime => {
                 if (jsonUltimoTime.length > 0) {
                     ultimostimesUser = jsonUltimoTime
-                    console.log("Todos times dos usuários na última rodada:", ultimostimesUser);
+                    console.log("Times dos usuários:", ultimostimesUser);
                     calcularPontuacaoUser()
                 }
             });

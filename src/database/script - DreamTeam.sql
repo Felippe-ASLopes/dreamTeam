@@ -128,10 +128,10 @@ concat(j2.nomeJogador, ' ', j2.sobrenome) as 'SG',
 concat(j3.nomeJogador, ' ', j3.sobrenome) as 'SF', 
 concat(j4.nomeJogador, ' ', j4.sobrenome) as 'PF', 
 concat(j5.nomeJogador, ' ', j5.sobrenome) as 'C',
-valor 
+valor,
+pontuacao
 from timeUsuario
 join usuario on fkusuario = idUsuario
-join rodada on fkRodada
 join jogador as j1 on fkJogador1 = j1.idJogador
 join jogador as j2 on fkJogador2 = j2.idJogador
 join jogador as j3 on fkJogador3 = j3.idJogador
@@ -151,6 +151,8 @@ join jogador on fkJogador = idJogador
 WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
 
 SELECT * FROM estatistica WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
+
+SELECT idUsuario, nomeTime, email, dinheiro, t.pontuacao as 'ultimaPontuacao' FROM usuario JOIN timeUsuario as t ON fkUsuario = idUsuario WHERE email = 'a' AND senha = md5('a') AND t.fkRodada = ((SELECT MAX(fkRodada) FROM timeUsuario));
         
 -- COMANDOS PARA TESTE --
 -- truncate table estatistica;

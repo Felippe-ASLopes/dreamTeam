@@ -3,6 +3,7 @@ let dinheiroUser = 0
 let valorTime = 0
 let dinheiroRestante = 0
 let timePodeInserir = true
+let podeLimparTime = false
 
 function obterTimeUsuario() {
     const idUsuario = sessionStorage.ID_USUARIO
@@ -433,39 +434,42 @@ function atualizarTime() {
 }
 
 function limparTimeUsuario() {
-    //  ADICIONAR A ULTIMA PONTUAÇÃO NA HORA DO LOGIN
-    for (let posicao = 0; posicao < timeUser.length; posicao++) {
-        timeUser[posicao] = ''
-
-        let posicaoRestaurada = 'Guard'
-        let posicaoSiglaRestaurada = 'PG'
-        if (posicao == 1) {
-            posicaoSiglaRestaurada = 'SG'
+    if (podeLimparTime) {
+        podeLimparTime = false
+        //  ADICIONAR A ULTIMA PONTUAÇÃO NA HORA DO LOGIN
+        for (let posicao = 0; posicao < timeUser.length; posicao++) {
+            timeUser[posicao] = ''
+    
+            let posicaoRestaurada = 'Guard'
+            let posicaoSiglaRestaurada = 'PG'
+            if (posicao == 1) {
+                posicaoSiglaRestaurada = 'SG'
+            }
+            else if (posicao == 2) {
+                posicaoRestaurada += ' ou Foward'
+                posicaoSiglaRestaurada = 'SF'
+            }
+            else if (posicao == 3) {
+                posicaoRestaurada = 'Foward'
+                posicaoSiglaRestaurada = 'PF'
+            }
+            else if (posicao == 4) {
+                posicaoRestaurada = 'Foward'
+                posicaoSiglaRestaurada = 'C'
+            }
+    
+            const divAlterarTime = document.getElementById(`jogador${posicao}`)
+            const imgAlterar = document.getElementById(`img_jogador${posicao}`)
+            const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
+    
+            divAlterarTime.innerHTML = `Adicione um ${posicaoRestaurada}`
+    
+            imgAlterar.src = './assets/img/icon_plus.png'
+            imgAlterar.classList.remove('ajustar_foto_jogador')
+            imgAlterar.classList.add('icon_plus')
+            spanAlterar.innerHTML = `${posicaoSiglaRestaurada}`
         }
-        else if (posicao == 2) {
-            posicaoRestaurada += ' ou Foward'
-            posicaoSiglaRestaurada = 'SF'
-        }
-        else if (posicao == 3) {
-            posicaoRestaurada = 'Foward'
-            posicaoSiglaRestaurada = 'PF'
-        }
-        else if (posicao == 4) {
-            posicaoRestaurada = 'Foward'
-            posicaoSiglaRestaurada = 'C'
-        }
-
-        const divAlterarTime = document.getElementById(`jogador${posicao}`)
-        const imgAlterar = document.getElementById(`img_jogador${posicao}`)
-        const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
-
-        divAlterarTime.innerHTML = `Adicione um ${posicaoRestaurada}`
-
-        imgAlterar.src = './assets/img/icon_plus.png'
-        imgAlterar.classList.remove('ajustar_foto_jogador')
-        imgAlterar.classList.add('icon_plus')
-        spanAlterar.innerHTML = `${posicaoSiglaRestaurada}`
+        valorTime = 0
+        obterTimeUsuario()
     }
-    valorTime = 0
-    atualizarDinheiroUser()
 }

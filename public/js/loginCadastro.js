@@ -27,6 +27,7 @@ function login() {
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
+                sessionStorage.ULTIMA_PONTUACAO = json.ultimaPontuacao;
                 obterTimeUsuario()
                 fecharlogin()
                 if (sessionStorage.ID_USUARIO == 1) {
