@@ -1,0 +1,22 @@
+ERROS:
+-dinheiroUser nao atualiza nem no banco
+- valor do time nao apaga
+-pontuação undefined time user - funcao nao é executada
+- nao atualiza depois de gerar estatisticas - nao executa funcao
+-valor nao é inserido
+
+OK:
+-pontuação nao atualiza ao abrir o mercardo chega nan- ok
+-valor jogador nan no banco - ok
+-valorização nao redefine ainda
+users no banco
+timeusers no banco
+estatisticas no banco
+pontuacao jogadores no banco
+valorjogadores no banco
+
+-time some ao abrir o mercado - teste ok, porem comportamento esperado
+-exibe posicao ao inves de pontos no time user - ok
+-valor do time quebra ao remover jogadores - teste ok
+-aparece dois lista de jogadores no console - teste ok
+-valor nao arredonda no time user - teste ok

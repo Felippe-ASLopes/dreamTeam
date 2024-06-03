@@ -29,9 +29,9 @@ function login() {
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
                 obterTimeUsuario()
                 fecharlogin()
-                if (sessionStorage.ID_USUARIO == 1) [
+                if (sessionStorage.ID_USUARIO == 1) {
                     exibirGerador()
-                ]
+                }
             });
 
         } else {
@@ -60,7 +60,11 @@ function cadastrar() {
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
         div_erro_cadastro.innerHTML = `Preencha todos os campos para realizar o cadastro!`
         return false;
-    } else if (confirmacaoSenhaVar != senhaVar) {
+    } else if (senhaVar.length < 5) {
+        div_erro_cadastro.innerHTML = `Sua Senha deve ter mais de 5 caracteres para realizar o cadastro!`
+        return false;
+    }
+    else if (confirmacaoSenhaVar != senhaVar) {
         div_erro_cadastro.innerHTML = `Os campos Senha e Confirmação de Senha devem ser iguais para realizar o cadastro!`
         return false;
     }

@@ -11,7 +11,7 @@ function autenticar(email, senha) {
 function obterTimeUsuario(idUsuario) {
     var instrucaoSql = `
         SELECT * FROM timeUsuario
-        WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario) and fkUsuario = ${idUsuario};
+        WHERE fkRodada = (SELECT MAX(idRodada) FROM rodada) and fkUsuario = ${idUsuario};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -30,7 +30,7 @@ function cadastrar(nome, email, senha) {
 function inserirTime(idUsuario, rodada, jogador1, jogador2, jogador3, jogador4, jogador5, valor) {
     var instrucaoSql = `
         INSERT INTO timeUsuario VALUES
-        (${idUsuario}, ${rodada}, ${jogador1}, ${jogador2}, ${jogador3}, ${jogador4}, ${jogador5}, ${valor});
+        (${idUsuario}, ${rodada}, ${jogador1}, ${jogador2}, ${jogador3}, ${jogador4}, ${jogador5}, ${valor}, 0);
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

@@ -24,8 +24,15 @@ function AvisoMercadoFechado() {
 
 function avisoLogin() {
     container_mensagens.style.backgroundColor = '#007A33'
-    container_mensagens.innerHTML = `
-    <span>Seja bem-vindo</span>`
+
+    // if (ultimotimeUser.length == 0) {
+        container_mensagens.innerHTML = `
+        <span>Seja bem-vindo</span>`
+    // }
+    // else {
+    //     container_mensagens.innerHTML = `
+    //     <span>Seja bem-vindo, sua última pontuação foi ${pontuacaoUltimoTimeUser} e seu time valorizou em $ ${valorizacaoTime}</span>`
+    // }
 
     setTimeout(avisoMercado, 5000)
 }

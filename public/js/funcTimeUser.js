@@ -5,7 +5,7 @@ let dinheiroRestante = 0
 let timePodeInserir = true
 
 function obterTimeUsuario() {
-    const idUsuario = sessionStorage.ID_USUARIO;
+    const idUsuario = sessionStorage.ID_USUARIO
 
     fetch(`/usuarios/obterTimeUsuario/${idUsuario}`, {
         method: "GET",
@@ -15,7 +15,6 @@ function obterTimeUsuario() {
     }).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(json => {
-                console.log("Time do Usuário:", json);
                 if (json.length > 0) {
                     timeUser[0] = json[0].fkJogador1
                     timeUser[1] = json[0].fkJogador2
@@ -23,6 +22,7 @@ function obterTimeUsuario() {
                     timeUser[3] = json[0].fkJogador4
                     timeUser[4] = json[0].fkJogador5
                     valorTime = Number(json[0].valor)
+                    console.log("Time do Usuário:", json);
                     exibirTimeUser()
                 }
                 exibirNomeTimeUser()
@@ -48,72 +48,82 @@ function exibirNomeTimeUser() {
 }
 
 function atualizarDinheiroUser() {
-    dinheiroRestante = dinheiroUser - valorTime
+    dinheiroRestante = (dinheiroUser - valorTime).toFixed(2)
 
     dinheiro_total.innerHTML = `
     $ ${dinheiroRestante}`
 
     valor_time.innerHTML = `
-    $ ${valorTime}`
+    $ ${valorTime.toFixed(2)}`
 }
 
 function exibirTimeUser() {
-    timePodeInserir = false
+    if (timeUser[0] != '' &&
+        timeUser[1] != '' &&
+        timeUser[2] != '' &&
+        timeUser[3] != '' &&
+        timeUser[4] != '') {
+        timePodeInserir = false
 
-    for (let posicao = 0; posicao < timeUser.length; posicao++) {
-        const jogador = timeUser[posicao]
+        for (let posicao = 0; posicao < timeUser.length; posicao++) {
+            const jogador = timeUser[posicao]
 
-        const nomeJogadorAdd = jogadores[jogador - 1].nomeJogador
-        const sobrenomeJogadorAdd = jogadores[jogador - 1].sobrenome
-        const posicaoJogadorAdd = jogadores[jogador - 1].sigla
-        const valorJogadorAdd = Number(jogadores[jogador - 1].preco)
-        const imgJogadorAdd = jogadores[jogador - 1].urlImagem
+            const nomeJogadorAdd = jogadores[jogador - 1].nomeJogador
+            const sobrenomeJogadorAdd = jogadores[jogador - 1].sobrenome
+            const posicaoJogadorAdd = jogadores[jogador - 1].sigla
+            const valorJogadorAdd = Number(jogadores[jogador - 1].preco)
+            const imgJogadorAdd = jogadores[jogador - 1].urlImagem
+            let pontosJogador = 0
 
-        const divAlterarTime = document.getElementById(`jogador${posicao}`)
-        divAlterarTime.innerHTML = `
-        <div class="div_img_jogador">
-            <img src="${imgJogadorAdd}" class="img_jogador">
-        </div>
-        <div class="container_info_jogador">
-            <div class="div_nome_jogador">
-                <span>${nomeJogadorAdd} ${sobrenomeJogadorAdd} - ${posicaoJogadorAdd}</span>
+            if (estatisticas.length > 0) {
+                pontosJogador = Number(estatisticas[posicao].pontuacaoJogador)
+            }
+
+            const divAlterarTime = document.getElementById(`jogador${posicao}`)
+            divAlterarTime.innerHTML = `
+            <div class="div_img_jogador">
+                <img src="${imgJogadorAdd}" class="img_jogador">
             </div>
-            <div class="div_valor_add">
-                <div class="div_info_jogador">
-                    <span>Posicao:</span>
-                    <span>${posicaoJogadorAdd}</span>
+            <div class="container_info_jogador">
+                <div class="div_nome_jogador">
+                    <span>${nomeJogadorAdd} ${sobrenomeJogadorAdd} - ${posicaoJogadorAdd}</span>
                 </div>
-                <div class="div_info_jogador">
-                    <span>Valor:</span>
-                    <span>$ ${valorJogadorAdd}</span>
-                </div>
-                <div class="div_info_jogador">
-                    <div class="background_remove" onclick="removerJogador(${jogador})">
-                        <img src="./assets/img/icon_minus.png" class="icon_minus">
+                <div class="div_valor_add">
+                    <div class="div_info_jogador">
+                        <span>Ultima<br>pontuação:</span>
+                        <span>${pontosJogador}</span>
+                    </div>
+                    <div class="div_info_jogador">
+                        <span>Valor:</span>
+                        <span>$ ${valorJogadorAdd}</span>
+                    </div>
+                    <div class="div_add_jogador">
+                        <div class="background_remove" onclick="removerJogador(${jogador})">
+                            <img src="./assets/img/icon_minus.png" class="icon_minus">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>`
+            </div>`
 
-        // ADICIONA NO CAMPO
-        const imgAlterar = document.getElementById(`img_jogador${posicao}`)
-        imgAlterar.src = imgJogadorAdd
-        imgAlterar.classList.remove('icon_plus')
-        imgAlterar.classList.add('ajustar_foto_jogador')
-        const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
-        spanAlterar.innerHTML = `${nomeJogadorAdd} ${sobrenomeJogadorAdd}`
+            // ADICIONA NO CAMPO
+            const imgAlterar = document.getElementById(`img_jogador${posicao}`)
+            imgAlterar.src = imgJogadorAdd
+            imgAlterar.classList.remove('icon_plus')
+            imgAlterar.classList.add('ajustar_foto_jogador')
+            const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
+            spanAlterar.innerHTML = `${nomeJogadorAdd} ${sobrenomeJogadorAdd}`
 
 
-        // REMOVE DO MERCADO
-        const divAlterarMercado = document.getElementById(`mercado_jogador${jogador}`)
-        divAlterarMercado.style.display = 'none'
+            // REMOVE DO MERCADO
+            const divAlterarMercado = document.getElementById(`mercado_jogador${jogador}`)
+            divAlterarMercado.style.display = 'none'
+        }
+
+        div_text_enviar_time.innerHTML = `
+        <span>Atualizar Time</span>
+        `
+        // avisoTimeCarregado()
     }
-
-    div_text_enviar_time.innerHTML = `
-    <span>Atualizar Time</span>
-    `
-
-    avisoTimeCarregado()
 }
 
 
@@ -124,24 +134,30 @@ function addJogador() {
         const elemento = event.target.closest('.background_add');
         const idJogadorAdd = elemento.id;
         const valorJogadorAdd = Number(jogadores[idJogadorAdd - 1].preco)
-    
-        if (valorJogadorAdd < dinheiroRestante) {
+
+        if (valorJogadorAdd <= dinheiroRestante) {
             const nomeJogadorAdd = jogadores[idJogadorAdd - 1].nomeJogador
             const sobrenomeJogadorAdd = jogadores[idJogadorAdd - 1].sobrenome
             const posicaoJogadorAdd = jogadores[idJogadorAdd - 1].sigla
             const imgJogadorAdd = jogadores[idJogadorAdd - 1].urlImagem
-    
+            let pontosJogador = 0
+
+            
             if ((posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') &&
-                (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
+            (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
                 for (let posicao = 0; posicao <= 2; posicao++) {
                     if (timeUser[posicao] == '') {
                         // ATUALIZA O VETOR timeUser
                         timeUser[posicao] = idJogadorAdd
-    
+                        
                         // ATULIZA VALOR TIME
                         valorTime += valorJogadorAdd
                         atualizarDinheiroUser()
-    
+                        
+                        if (estatisticas.length > 0) {
+                            pontosJogador = Number(estatisticas[posicao].pontuacaoJogador)
+                        }
+
                         // ADICIONA NO TIMEUSER
                         const divAlterarTime = document.getElementById(`jogador${posicao}`)
                         divAlterarTime.innerHTML = `
@@ -155,7 +171,7 @@ function addJogador() {
                             <div class="div_valor_add">
                                 <div class="div_info_jogador">
                                     <span>Ultima<br>pontuação:</span>
-                                    <span>${posicaoJogadorAdd}</span>
+                                    <span>${pontosJogador}</span>
                                 </div>
                                 <div class="div_info_jogador">
                                     <span>Valor:</span>
@@ -168,21 +184,21 @@ function addJogador() {
                                 </div>
                             </div>
                         </div>`
-    
+
                         // ADICIONA NO CAMPO
                         const imgAlterar = document.getElementById(`img_jogador${posicao}`)
                         imgAlterar.src = imgJogadorAdd
                         imgAlterar.classList.remove('icon_plus')
                         imgAlterar.classList.add('ajustar_foto_jogador')
-    
+
                         const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
                         spanAlterar.innerHTML = `${nomeJogadorAdd} ${sobrenomeJogadorAdd}`
-    
-    
+
+
                         // REMOVE DO MERCADO
                         const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
                         divAlterarMercado.style.display = 'none'
-    
+
                         break
                     }
                 }
@@ -192,14 +208,17 @@ function addJogador() {
                     if (timeUser[posicao] == '' && valorJogadorAdd <= dinheiroRestante) {
                         // ATUALIZA O VETOR timeUser
                         timeUser[posicao] = idJogadorAdd
-    
+
                         // ATULIZA VALOR TIME
                         valorTime += valorJogadorAdd
                         atualizarDinheiroUser()
-    
+
+                        if (estatisticas.length > 0) {
+                            pontosJogador = Number(estatisticas[posicao].pontuacaoJogador)
+                        }
+                        
                         // ADICIONA NO TIMEUSER
                         const divAlterarTime = document.getElementById(`jogador${posicao}`)
-    
                         divAlterarTime.innerHTML = `
                         <div class="div_img_jogador">
                             <img src="${imgJogadorAdd}" class="img_jogador">
@@ -211,7 +230,7 @@ function addJogador() {
                             <div class="div_valor_add">
                                 <div class="div_info_jogador">
                                     <span>Ultima<br>pontuação:</span>
-                                    <span>${posicaoJogadorAdd}</span>
+                                    <span>${pontosJogador}</span>
                                 </div>
                                 <div class="div_info_jogador">
                                     <span>Valor:</span>
@@ -224,21 +243,21 @@ function addJogador() {
                                 </div>
                             </div>
                         </div>`
-    
+
                         // ADICIONA NO CAMPO
                         const imgAlterar = document.getElementById(`img_jogador${posicao}`)
                         imgAlterar.src = imgJogadorAdd
                         imgAlterar.classList.remove('icon_plus')
                         imgAlterar.classList.add('ajustar_foto_jogador')
-    
+
                         const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
                         spanAlterar.innerHTML = `${nomeJogadorAdd} ${sobrenomeJogadorAdd}`
-    
-    
+
+
                         // REMOVE DO MERCADO
                         const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
                         divAlterarMercado.style.display = 'none'
-    
+
                         break
                     }
                 }
@@ -259,15 +278,15 @@ function addJogador() {
 function removerJogador(idJogadorAdd) {
     if (mercadoAberto) {
         const idJogadorRemover = idJogadorAdd
-        const valorJogadorRemover = Number(jogadores[idJogadorAdd - 1].preco)
-    
+        const valorJogadorRemover = Number(jogadores[idJogadorRemover - 1].preco)
+
         for (let i = 0; i <= 4; i++) {
             if (timeUser[i] == idJogadorRemover) {
                 timeUser[i] = ''
 
                 valorTime -= valorJogadorRemover
                 atualizarDinheiroUser()
-    
+
                 let posicaoRestaurada = 'Guard'
                 let posicaoSiglaRestaurada = 'PG'
                 if (i == 1) {
@@ -285,21 +304,21 @@ function removerJogador(idJogadorAdd) {
                     posicaoRestaurada = 'Foward'
                     posicaoSiglaRestaurada = 'C'
                 }
-    
+
                 const divAlterarTime = document.getElementById(`jogador${i}`)
                 const imgAlterar = document.getElementById(`img_jogador${i}`)
                 const spanAlterar = document.getElementById(`span_nome_jogador${i}`)
-    
+
                 divAlterarTime.innerHTML = `Adicione um ${posicaoRestaurada}`
-    
+
                 imgAlterar.src = './assets/img/icon_plus.png'
                 imgAlterar.classList.remove('ajustar_foto_jogador')
                 imgAlterar.classList.add('icon_plus')
                 spanAlterar.innerHTML = `${posicaoSiglaRestaurada}`
-    
+
                 const divAlterarMercado = document.getElementById(`mercado_jogador${idJogadorAdd}`)
                 divAlterarMercado.style.display = 'flex'
-    
+
                 break
             }
         }
@@ -321,7 +340,7 @@ function salvarTime() {
             const jogador4 = timeUser[3]
             const jogador5 = timeUser[4]
             const valor = valorTime
-    
+
             fetch("/usuarios/inserirTime", {
                 method: "POST",
                 headers: {
@@ -341,14 +360,14 @@ function salvarTime() {
                 if (resposta.ok) {
                     console.log("Time inserido com sucesso!");
                     avisoTimeEnviado()
-    
+
                     div_text_enviar_time.innerHTML = `
                     <span>Atualizar Time</span>
                     `
                 } else {
                     console.log("Houve um erro ao tentar inserir o time!");
                     avisoErroEnviarTime()
-    
+
                     resposta.text().then(texto => {
                         console.error(texto);
                     });
@@ -376,7 +395,7 @@ function atualizarTime() {
         const jogador4 = timeUser[3]
         const jogador5 = timeUser[4]
         const valor = valorTime
-    
+
         fetch("/usuarios/atualizarTime", {
             method: "PUT",
             headers: {
@@ -399,7 +418,7 @@ function atualizarTime() {
             } else {
                 console.log("Houve um erro ao tentar atualizar o time!");
                 avisoErroEnviarTime()
-    
+
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
@@ -411,4 +430,42 @@ function atualizarTime() {
     else {
         AvisoMercadoFechado()
     }
+}
+
+function limparTimeUsuario() {
+    //  ADICIONAR A ULTIMA PONTUAÇÃO NA HORA DO LOGIN
+    for (let posicao = 0; posicao < timeUser.length; posicao++) {
+        timeUser[posicao] = ''
+
+        let posicaoRestaurada = 'Guard'
+        let posicaoSiglaRestaurada = 'PG'
+        if (posicao == 1) {
+            posicaoSiglaRestaurada = 'SG'
+        }
+        else if (posicao == 2) {
+            posicaoRestaurada += ' ou Foward'
+            posicaoSiglaRestaurada = 'SF'
+        }
+        else if (posicao == 3) {
+            posicaoRestaurada = 'Foward'
+            posicaoSiglaRestaurada = 'PF'
+        }
+        else if (posicao == 4) {
+            posicaoRestaurada = 'Foward'
+            posicaoSiglaRestaurada = 'C'
+        }
+
+        const divAlterarTime = document.getElementById(`jogador${posicao}`)
+        const imgAlterar = document.getElementById(`img_jogador${posicao}`)
+        const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
+
+        divAlterarTime.innerHTML = `Adicione um ${posicaoRestaurada}`
+
+        imgAlterar.src = './assets/img/icon_plus.png'
+        imgAlterar.classList.remove('ajustar_foto_jogador')
+        imgAlterar.classList.add('icon_plus')
+        spanAlterar.innerHTML = `${posicaoSiglaRestaurada}`
+    }
+    valorTime = 0
+    atualizarDinheiroUser()
 }

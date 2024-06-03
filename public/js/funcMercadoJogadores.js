@@ -1,4 +1,7 @@
 let jogadores = []
+let estatisticas = []
+const pontuacao = []
+const valorJogadoresUltimaRodada = []
 
 function obterJogadores() {
     fetch("/jogadores/obter", {
@@ -26,6 +29,8 @@ function obterJogadores() {
 }
 
 function exibirJogadores() {
+    container_jogadores_mercado.innerHTML = ''
+    let pontosJogador = 0
     for (let posicao = 0; posicao < jogadores.length; posicao++) {
         const idJogador = jogadores[posicao].idJogador
         const nome = jogadores[posicao].nomeJogador
@@ -33,7 +38,10 @@ function exibirJogadores() {
         const posicaoJogador = jogadores[posicao].sigla
         const valor = Number(jogadores[posicao].preco)
         const img = jogadores[posicao].urlImagem
-        const pontosJogador = pontuacao[posicao]
+
+        if (estatisticas.length > 0) {
+            pontosJogador = Number(estatisticas[posicao].pontuacaoJogador)
+        }
 
         container_jogadores_mercado.innerHTML += `
             <div id="mercado_jogador${idJogador}" class="container_jogador_mercado">
@@ -62,4 +70,5 @@ function exibirJogadores() {
                 </div>
             </div>`;
     }
+    limparTimeUsuario()
 }

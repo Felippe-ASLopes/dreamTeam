@@ -11,6 +11,41 @@ function obterJogadores() {
     return database.executar(instrucaoSql);
 }
 
+function atualizarPontuacaoJogadores(jogador, pontuacaoJogador) {
+    var instrucaoSql = `
+        UPDATE estatistica
+        SET pontuacaoJogador = ${pontuacaoJogador}
+        WHERE fkJogador = ${jogador};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterValoresJogadores() {
+    var instrucaoSql = `
+        SELECT idJogador, preco
+        FROM jogador;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarPrecoJogadores(jogador, comandoSql) {
+    var instrucaoSql = `
+        UPDATE jogador
+        SET preco = preco ${comandoSql}
+        WHERE idJogador = ${jogador};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    obterJogadores
+    obterJogadores,
+    atualizarPontuacaoJogadores,
+    obterValoresJogadores,
+    atualizarPrecoJogadores
 };

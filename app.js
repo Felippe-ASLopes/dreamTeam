@@ -19,7 +19,7 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var jogadorRouter = require("./src/routes/jogadores");
 var rodadaRouter = require("./src/routes/rodada");
-var geradorRouter = require("./src/routes/gerador");
+var adminRouter = require("./src/routes/admin");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,7 +31,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/jogadores", jogadorRouter);
 app.use("/rodada", rodadaRouter);
-app.use("/gerador", geradorRouter);
+app.use("/admin", adminRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

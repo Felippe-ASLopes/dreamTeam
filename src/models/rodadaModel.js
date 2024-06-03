@@ -13,7 +13,7 @@ function obterRodada() {
 function obterEstatistica() {
     var instrucaoSql = `
         SELECT * FROM estatistica
-        WHERE fkPartida = (SELECT MAX(fkPartida) FROM estatistica);
+        WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

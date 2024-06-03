@@ -25,6 +25,17 @@ cidade varchar(24),
 nomeTimeNba varchar(24)
 );
 
+create table partida (
+idPartida int auto_increment,
+fkRodada int,
+fkTimeCasa int,
+fkTimeFora int,
+constraint fkRodadaPartida foreign key (fkRodada) references rodada (idRodada),
+constraint fkTimeCasaPartida foreign key (fkTimeCasa) references timeNba (idTime),
+constraint fkTimeForaPartida foreign key (fkTimeFora) references timeNba (idTime),
+constraint pkPartida primary key (idPartida, fkRodada)
+);
+
 create table posicao (
 idPosicao int primary key auto_increment,
 sigla char(2)
@@ -43,7 +54,7 @@ constraint fkPosicaoJogador foreign key (fkPosicao) references posicao (idPosica
 );
 
 create table estatistica (
-fkRodada int,
+fkPartida int,
 fkJogador int,
 ponto int,
 assistencia int,
@@ -52,10 +63,9 @@ bloqueio int,
 roubo int,
 turnOver int,
 falta int,
-pontuacaoJogador decimal(5,2),
-constraint fkRodadaEstatistica foreign key (fkRodada) references rodada (idRodada),
+constraint fkPartidaEstatistica foreign key (fkPartida) references partida (idPartida),
 constraint fkJogadorEstatistica foreign key (fkJogador) references jogador (idJogador),
-constraint pkEstatistica primary key (fkRodada, fkJogador)
+constraint pkEstatistica primary key (fkPartida, fkJogador)
 );
 
 create table timeUsuario (
@@ -67,7 +77,6 @@ fkJogador3 int,
 fkJogador4 int,
 fkJogador5 int,
 valor decimal(5,2),
-pontuacao decimal(5,2),
 constraint fkUsuarioTime foreign key (fkUsuario) references usuario (idUsuario),
 constraint fkRodadaTime foreign key (fkRodada) references rodada (idRodada),
 constraint fkjogador1Time foreign key (fkJogador1) references jogador (idJogador),
@@ -106,10 +115,10 @@ insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco, urlImagem
 (7, 'Stephen', 'Curry', 1, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254');
 
 insert into rodada values
-(default, '2024-12-31 23:59:59', '2024-01-01 00:00:00');
+(default, '2024-06-01 23:54:00', '2024-06-01 23:5:00');
 
-insert into usuario values
-(default, 'Admin', 'a', md5('a'), 500);
+insert into partida values
+(default, 1, 1, 2);
 
 select * from usuario;
 select * from jogador;
@@ -117,6 +126,7 @@ select * from timeNBA;
 select * from timeUsuario;
 select * from rodada;
 select * from estatistica;
+select * from partida;
 
 select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador
 join timeNba on fkTime = idTime
@@ -139,20 +149,15 @@ join jogador as j4 on fkJogador4 = j4.idJogador
 join jogador as j5 on fkJogador5 = j5.idJogador
 WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario);
 
+select idRodada, date(inicio) as 'dataInicio', time(inicio) as 'horaInicio', date(fim) as 'dataFim', time(fim) as 'horaFim' from rodada;
+
 SELECT * FROM timeUsuario
 WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario);
 
-SELECT fkJogador, ROUND(AVG(pontuacaoJogador), 2) AS mediaPontuacao
-FROM estatistica
-GROUP BY fkJogador;
-
-SELECT fkRodada, concat(nomeJogador, ' ', sobrenome) as 'Nome jogador', ponto, assistencia, rebote, bloqueio, roubo, turnOver, falta FROM estatistica
+SELECT fkPartida, concat(nomeJogador, ' ', sobrenome) as 'Nome jogador', ponto, assistencia, rebote, bloqueio, roubo, turnOver, falta FROM estatistica
 join jogador on fkJogador = idJogador
-WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
+WHERE fkPartida = (SELECT MAX(fkPartida) FROM estatistica);
 
-SELECT * FROM estatistica WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
-        
 -- COMANDOS PARA TESTE --
--- truncate table estatistica;
--- update jogador set preco = preco - 1 where idJogador = 1; --
--- drop database dreamteam; --
+-- update usuario set dinheiro = 500 where idUsuario = 1; --
+truncate table estatistica;

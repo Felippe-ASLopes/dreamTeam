@@ -42,6 +42,7 @@ function obterRodada() {
                 horaFimRodada = Number(horarioFimRodada.substring(0, 2))
                 segundoFimRodada = Number(horarioFimRodada.substring(6, 8))
                 console.log("Rodada:", rodadaAtual);
+                obterEstatistica()
             });
         } else {
             console.log("Houve um erro ao tentar obter a rodada!");
@@ -78,9 +79,9 @@ function verificarHorario() {
         mesAtual == mesFimRodada &&
         anoAtual == anoFimRodada) {
         mercadoAberto = true
+        // atualizarJogadores()
         container_enviar_time.classList.remove('oculto')
         avisoMercado()
     }
 }
-
 setInterval(verificarHorario, 1000)
