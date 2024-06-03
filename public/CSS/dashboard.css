@@ -1,0 +1,38 @@
+body {
+    background-color: #0d0e0e;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width: 90vw;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border: solid red;
+}
+
+#div_voltar {
+    width: 15vw;
+    height: 8vh;
+    position: absolute;
+    right: 41%;
+    top: 0.5%;
+    border: solid red;
+    display: flex;
+    flex-direction: row;
+}
+
+#container_jogadores {
+    width: 85vh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid green;
+}
