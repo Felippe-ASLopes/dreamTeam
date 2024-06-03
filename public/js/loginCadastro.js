@@ -15,7 +15,7 @@ function login() {
         },
         body: JSON.stringify({
             emailServer: emailVar,
-            senhaServer: senhaVar
+            senhaServer: senhaVar,
         })
     }).then(function (resposta) {
         if (resposta.ok) {
@@ -27,9 +27,13 @@ function login() {
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
                 sessionStorage.DINHEIRO_USUARIO = json.dinheiro;
-                sessionStorage.ULTIMA_PONTUACAO = json.ultimaPontuacao;
+                if (rodada > 1) {
+                    obterUltimaPontuacaoUser()
+                }
+                else {
+                    fecharlogin()
+                }
                 obterTimeUsuario()
-                fecharlogin()
                 if (sessionStorage.ID_USUARIO == 1) {
                     exibirGerador()
                 }

@@ -15,6 +15,10 @@ router.get("/obterTimeUsuario/:idUsuario", function (req, res) {
     usuarioController.obterTimeUsuario(req, res);
 });
 
+router.get("/obterUltimaPontuacaoUser/:idUsuario/:rodadaAnterior", function (req, res) {
+    usuarioController.obterUltimaPontuacaoUser(req, res);
+});
+
 router.post("/inserirTime", function (req, res) {
     usuarioController.inserirTime(req, res);
 });

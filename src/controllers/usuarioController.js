@@ -18,13 +18,13 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        res.json({
-                            id: resultadoAutenticar[0].idUsuario,
-                            email: resultadoAutenticar[0].email,
-                            nome: resultadoAutenticar[0].nomeTime,
-                            senha: resultadoAutenticar[0].senha,
-                            dinheiro: resultadoAutenticar[0].dinheiro,
-                        });
+                            res.json({
+                                id: resultadoAutenticar[0].idUsuario,
+                                email: resultadoAutenticar[0].email,
+                                nome: resultadoAutenticar[0].nomeTime,
+                                senha: resultadoAutenticar[0].senha,
+                                dinheiro: resultadoAutenticar[0].dinheiro,
+                            });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -44,6 +44,20 @@ function autenticar(req, res) {
 function obterTimeUsuario(req, res) {
     var idUsuario = req.params.idUsuario;
     usuarioModel.obterTimeUsuario(idUsuario)
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function obterUltimaPontuacaoUser(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var rodadaAnterior = req.params.rodadaAnterior;
+
+    usuarioModel.obterUltimaPontuacaoUser(idUsuario, rodadaAnterior)
         .then(result => {
             res.status(200).json(result);
         })
@@ -116,6 +130,7 @@ function atualizarTime(req, res) {
 module.exports = {
     autenticar,
     obterTimeUsuario,
+    obterUltimaPontuacaoUser,
     cadastrar,
     inserirTime,
     atualizarTime

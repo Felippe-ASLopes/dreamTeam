@@ -1,9 +1,9 @@
 var database = require("../database/config")
 
 function autenticar(email, senha) {
-    var instrucaoSql = `
-        SELECT idUsuario, nomeTime, email, dinheiro FROM usuario WHERE email = '${email}' AND senha = md5('${senha}');
-    `;
+        var instrucaoSql = `
+            SELECT idUsuario, nomeTime, email, dinheiro FROM usuario WHERE email = '${email}' AND senha = md5('${senha}');
+        `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -18,10 +18,20 @@ function obterTimeUsuario(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function obterUltimaPontuacaoUser(idUsuario, rodadaAnterior) {
+    var instrucaoSql = `
+        SELECT fkUsuario, fkRodada, pontuacao FROM timeUsuario
+        WHERE fkRodada = ${rodadaAnterior} AND fkUsuario = ${idUsuario};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function cadastrar(nome, email, senha) {
     var instrucaoSql = `
         INSERT INTO usuario (nomeTime, email, senha, dinheiro) VALUES 
-        ('${nome}', '${email}', md5('${senha}'), 100);
+        ('${nome}', '${email}', md5('${senha}'), 150);
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -58,6 +68,7 @@ function atualizarTime(idUsuario, rodada, jogador1, jogador2, jogador3, jogador4
 module.exports = {
     autenticar,
     obterTimeUsuario,
+    obterUltimaPontuacaoUser,
     cadastrar,
     inserirTime,
     atualizarTime

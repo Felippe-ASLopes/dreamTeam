@@ -2,6 +2,7 @@ const timeUser = ['', '', '', '', '']
 let dinheiroUser = 0
 let valorTime = 0
 let dinheiroRestante = 0
+let ultimaPontuacao = 0
 let timePodeInserir = true
 let podeLimparTime = false
 
@@ -40,6 +41,39 @@ function obterTimeUsuario() {
     });
 }
 
+function obterUltimaPontuacaoUser() {
+    const idUsuario = sessionStorage.ID_USUARIO;
+    const rodadaAnterior = rodada - 1;
+
+    fetch(`/usuarios/obterUltimaPontuacaoUser/${idUsuario}/${rodadaAnterior}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                if (json.length > 0) {
+                    ultimaPontuacao = Number(json[0].pontuacao)
+                    // console.log(`Pontuação na última rodada:`, json);
+                } else {
+                    console.log("Nenhuma pontuação encontrada para o usuário na última rodada.");
+                }
+                fecharlogin()
+            });
+        } else {
+            console.log("Houve um erro ao tentar obter a última pontuação do usuário!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+    }).catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+    });
+}
+
+
 function exibirNomeTimeUser() {
     dinheiroUser = Number(sessionStorage.DINHEIRO_USUARIO)
     div_nome_time.innerHTML = `
@@ -49,13 +83,13 @@ function exibirNomeTimeUser() {
 }
 
 function atualizarDinheiroUser() {
-    dinheiroRestante = (dinheiroUser - valorTime).toFixed(2)
+    dinheiroRestante = Number((dinheiroUser - valorTime).toFixed(2))
 
     dinheiro_total.innerHTML = `
     $ ${dinheiroRestante}`
 
     valor_time.innerHTML = `
-    $ ${valorTime.toFixed(2)}`
+    $ ${Number(valorTime.toFixed(2))}`
 }
 
 function exibirTimeUser() {
@@ -143,18 +177,18 @@ function addJogador() {
             const imgJogadorAdd = jogadores[idJogadorAdd - 1].urlImagem
             let pontosJogador = 0
 
-            
+
             if ((posicaoJogadorAdd == 'PG' || posicaoJogadorAdd == 'SG') &&
-            (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
+                (timeUser[0] == '' || timeUser[1] == '' || timeUser[2] == '')) {
                 for (let posicao = 0; posicao <= 2; posicao++) {
                     if (timeUser[posicao] == '') {
                         // ATUALIZA O VETOR timeUser
                         timeUser[posicao] = idJogadorAdd
-                        
+
                         // ATULIZA VALOR TIME
                         valorTime += valorJogadorAdd
                         atualizarDinheiroUser()
-                        
+
                         if (estatisticas.length > 0) {
                             pontosJogador = Number(estatisticas[posicao].pontuacaoJogador)
                         }
@@ -204,7 +238,8 @@ function addJogador() {
                     }
                 }
             }
-            else if ((posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') && (timeUser[2] == '' || timeUser[3] == '' || timeUser[4] == '')) {
+            else if ((posicaoJogadorAdd == 'SF' || posicaoJogadorAdd == 'PF' || posicaoJogadorAdd == 'C') &&
+                (timeUser[2] == '' || timeUser[3] == '' || timeUser[4] == '')) {
                 for (let posicao = 2; posicao <= 4; posicao++) {
                     if (timeUser[posicao] == '' && valorJogadorAdd <= dinheiroRestante) {
                         // ATUALIZA O VETOR timeUser
@@ -217,7 +252,7 @@ function addJogador() {
                         if (estatisticas.length > 0) {
                             pontosJogador = Number(estatisticas[posicao].pontuacaoJogador)
                         }
-                        
+
                         // ADICIONA NO TIMEUSER
                         const divAlterarTime = document.getElementById(`jogador${posicao}`)
                         divAlterarTime.innerHTML = `
@@ -439,7 +474,7 @@ function limparTimeUsuario() {
         //  ADICIONAR A ULTIMA PONTUAÇÃO NA HORA DO LOGIN
         for (let posicao = 0; posicao < timeUser.length; posicao++) {
             timeUser[posicao] = ''
-    
+
             let posicaoRestaurada = 'Guard'
             let posicaoSiglaRestaurada = 'PG'
             if (posicao == 1) {
@@ -457,13 +492,13 @@ function limparTimeUsuario() {
                 posicaoRestaurada = 'Foward'
                 posicaoSiglaRestaurada = 'C'
             }
-    
+
             const divAlterarTime = document.getElementById(`jogador${posicao}`)
             const imgAlterar = document.getElementById(`img_jogador${posicao}`)
             const spanAlterar = document.getElementById(`span_nome_jogador${posicao}`)
-    
+
             divAlterarTime.innerHTML = `Adicione um ${posicaoRestaurada}`
-    
+
             imgAlterar.src = './assets/img/icon_plus.png'
             imgAlterar.classList.remove('ajustar_foto_jogador')
             imgAlterar.classList.add('icon_plus')

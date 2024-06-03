@@ -25,13 +25,13 @@ function AvisoMercadoFechado() {
 function avisoLogin() {
     container_mensagens.style.backgroundColor = '#007A33'
 
-    if (rodada == 0) {
+    if (rodada == 1) {
         container_mensagens.innerHTML = `
         <span>Seja bem-vindo</span>`
     }
     else {
         container_mensagens.innerHTML = `
-        <span>Seja bem-vindo, sua pontuação na ${rodada - 1}° rodada, foi ${sessionStorage.ULTIMA_PONTUACAO}!</span>`
+        <span>Seja bem-vindo, sua pontuação na ${rodada - 1}° rodada, foi ${ultimaPontuacao}!</span>`
     }
 
     setTimeout(avisoMercado, 5000)

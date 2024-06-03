@@ -118,6 +118,8 @@ select * from timeUsuario;
 select * from rodada;
 select * from estatistica;
 
+update usuario set senha = md5('teste2') where idUsuario = 3;
+
 select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador
 join timeNba on fkTime = idTime
 join posicao on fkPosicao = idPosicao order by idJogador;
@@ -152,8 +154,12 @@ WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
 
 SELECT * FROM estatistica WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
 
-SELECT idUsuario, nomeTime, email, dinheiro, t.pontuacao as 'ultimaPontuacao' FROM usuario JOIN timeUsuario as t ON fkUsuario = idUsuario WHERE email = 'a' AND senha = md5('a') AND t.fkRodada = ((SELECT MAX(fkRodada) FROM timeUsuario));
-        
+SELECT fkUsuario, fkRodada, pontuacao FROM timeUsuario WHERE fkRodada = 1 and fkUsuario = 1;
+
+SELECT MAX(fkRodada) 
+FROM timeUsuario;
+
+
 -- COMANDOS PARA TESTE --
 -- truncate table estatistica;
 -- update jogador set preco = preco - 1 where idJogador = 1; --
