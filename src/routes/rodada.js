@@ -10,4 +10,12 @@ router.get("/obterEstatistica", function (req, res) {
     rodadaController.obterEstatistica(req, res);
 });
 
+router.get("/obterEstatisticaDashboard", function (req, res) {
+    rodadaController.obterEstatisticaDashboard(req, res);
+});
+
+router.get("/obterRodadaDashboard", function (req, res) {
+    rodadaController.obterRodadaDashboard(req, res);
+});
+
 module.exports = router;

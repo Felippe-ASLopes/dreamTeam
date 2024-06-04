@@ -23,4 +23,8 @@ router.post("/novaRodada", function (req, res) {
     adminController.novaRodada(req, res);
 });
 
+router.get("/obterUsuariosDashboard/:rodadaAnterior", function (req, res) {
+    adminController.obterUsuariosDashboard(req, res);
+});
+
 module.exports = router;

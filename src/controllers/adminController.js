@@ -69,10 +69,23 @@ function novaRodada(req, res) {
         });
 }
 
+function obterUsuariosDashboard(req, res) {
+    var rodadaAnterior = req.params.rodadaAnterior;
+    adminModel.obterUsuariosDashboard(rodadaAnterior)
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     inserir,
     obterTodosTimesUsuario,
     atualizarPontuacaoUser,
     atualizarDinheiroUser,
-    novaRodada
+    novaRodada,
+    obterUsuariosDashboard
 };

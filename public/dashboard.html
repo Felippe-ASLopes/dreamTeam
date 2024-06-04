@@ -8,26 +8,113 @@
 </head>
 
 <body>
-<main>
-    <div id="div_voltar" onclick="voltar()">
-        <div id="div_img_voltar">
-            <img src="">
+    <main>
+        <a href="./home.html">
+            <div id="div_voltar">
+                <div id="div_img_voltar">
+                    <img src="./assets/img/icon_voltar.png" class="ajustar_img_voltar">
+                </div>
+                <div id="div_text_voltar">
+                    <span>Voltar para home</span>
+                </div>
+            </div>
+        </a>
+        <div class="container_jogadores">
+            <div class="container_mural_jogadores">
+                <div class="container_melhor_jogador">
+                    <div id="img_melhor_jogador2" class="div_melhor_jogador">
+                    </div>
+                    <div id="div_nome_melhor_jogador2" class="div_nome_melhor_jogador">
+                    </div>
+                </div>
+                <div class="container_melhor_jogador div_melhor_jogador1">
+                    <div id="img_melhor_jogador1" class="div_melhor_jogador">
+                    </div>
+                    <div id="div_nome_melhor_jogador1" class="div_nome_melhor_jogador">
+                    </div>
+                </div>
+                <div class="container_melhor_jogador">
+                    <div id="img_melhor_jogador3" class="div_melhor_jogador">
+                    </div>
+                    <div id="div_nome_melhor_jogador3" class="div_nome_melhor_jogador">
+                    </div>
+                </div>
+            </div>
+            <div class="container_lista">
+                <div id="div_titulo_jogadores" class="div_titulo_lista">
+                    <span>Maiores pontuadores da última rodada</span>
+                </div>
+                <div id="div_lista_jogadores" class="div_lista">
+                    <div class="container_legenda">
+                        <div class="div_legenda_info_jogador">
+                            <span>Jogador</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Pontos</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Assistências</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Rebotes</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Bloqueios</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Roubos</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Turn overs</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador">
+                            <span>Faltas</span>
+                        </div>
+                        <div class="div_legenda_estatistica_jogador ultima_legenda">
+                            <span>Pontuação</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="div_text_voltar">
-            <span>Voltar para home</span>
-        </div>
-    </div>
-    <div id="container_jogadores">
-        <div id="container_jogador1"></div>
-        <div id="container_jogador2"></div>
-        <div id="container_jogador3"></div>
-        <div id="div_lista_jogadores"></div>
-    </div>
-</main>
+        <div class="container_times">
+            <div class="container_lista">
+                <div id="div_titulo_time" class="div_titulo_lista">
+                </div>
+                <div id="div_lista_times" class="div_lista">
+                    <div class="container_legenda">
+                        <div class="div_legenda_info_time">
+                            <span>Time</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time">
+                            <span>PG</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time">
+                            <span>SG</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time">
+                            <span>SF</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time">
+                            <span>PF</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time">
+                            <span>C</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time">
+                            <span>Valor</span>
+                        </div>
+                        <div class="div_legenda_estatistica_time ultima_legenda_time">
+                            <span>Pontuação</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
 </body>
 
 </html>
 
-<!-- <script src="./js/loginCadastro.js"></script>
+<script src="./js/dashboard.js"></script>
 
-<body onload=""> -->
+<body onload="obterRodadaDashboard()">

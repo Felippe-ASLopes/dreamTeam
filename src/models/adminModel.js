@@ -47,10 +47,21 @@ function novaRodada() {
     return database.executar(instrucaoSql);
 }
 
+function obterUsuariosDashboard(rodadaAnterior) {
+    var instrucaoSql = `
+    SELECT nomeTime, fkJogador1, fkJogador2, fkJogador3, fkJogador4, fkJogador5, pontuacao, valor FROM timeUsuario JOIN usuario on fkUsuario = idUsuario
+    WHERE fkRodada = ${rodadaAnterior} ORDER BY pontuacao DESC;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     inserir,
     obterTodosTimesUsuario,
     atualizarPontuacaoUser,
     atualizarDinheiroUser,
-    novaRodada
+    novaRodada,
+    obterUsuariosDashboard
 };

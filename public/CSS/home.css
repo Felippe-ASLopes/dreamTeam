@@ -21,6 +21,10 @@ body {
     filter: blur(5px);
 }
 
+* > a {
+    text-decoration: none;
+}
+
 /* TELA DE LOGIN/CADASTRO */
 #container_login_cadastro {
     width: 100vw;
@@ -57,7 +61,7 @@ body {
     width: 35%;
     height: 75%;
     display: flex;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 20px;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
@@ -112,7 +116,7 @@ body {
 }
 
 .input_formulario {
-    width: 90%;
+    width: 99%;
     height: 4vh;
     background: none;
     border-top: none;
@@ -206,6 +210,52 @@ aside {
     font-size: 1.2vw;
     transition: 0.5s;
     text-align: center;
+}
+
+#container_paginas {
+    width: 15vw;
+    height: 3vh;
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #0077C0;
+    bottom: 87vh;
+    border-radius: 0px 0px 10px 10px;
+    border: solid white;
+    border-top: none;
+    color: #ffffff;
+    font-family: gliker;
+    font-size: 0.9vw;
+    transition: 0.5s;
+    text-align: center;
+}
+
+#container_paginas > a {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 0px 0px 10px;
+    color: #ffffff;
+}
+
+#div_sair {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 0px 10px 0px;
+    cursor: pointer;
+}
+
+#container_paginas > a:hover,
+#div_sair:hover {
+    background-color: #1D428A;
 }
 
 /* PARTE ESQUERDA, INFO DO USUARIO */

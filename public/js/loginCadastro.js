@@ -128,7 +128,12 @@ function mostrarCadastro() {
 function fecharlogin() {
     main_time.classList.remove('blur')
     container_mensagens.classList.remove('oculto')
+    container_paginas.classList.remove('oculto')
     container_login_cadastro.style.display = 'none'
     document.title = 'Dream Team - Monte seu time'
     avisoLogin()
+}
+
+function sair() {
+    location.reload()
 }

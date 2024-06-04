@@ -5,6 +5,7 @@ create user 'API'@'localhost' identified by 'webDataViz0API';
 grant insert, select, update on dreamTeam.* to 'API'@'localhost';
 show grants for 'API'@'localhost';
 
+
 create table usuario (
 idUsuario int primary key auto_increment,
 nomeTime varchar(24),
@@ -103,7 +104,13 @@ insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco, urlImagem
 (5, 'Ben', 'Simmons', 1, 5.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3907387.png&w=350&h=254'),
 (3, 'Luka' , 'Dončić', 2, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3945274.png&w=350&h=254'),
 (6, 'Giannis', 'Antetokounmpo', 4, 25, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3032977.png&w=350&h=254'),
-(7, 'Stephen', 'Curry', 1, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254');
+(7, 'Stephen', 'Curry', 1, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254'),
+(1, 'Damian', 'Lillard', 1, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6606.png&w=350&h=254'),
+(1, 'James', 'Harden', 2, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3992.png&w=350&h=254'),
+(1, 'Bam', 'Adebayo', 5, 10, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4066261.png&w=350&h=254'),
+(1, 'Nikola', 'Jokic', 5, 20, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3112335.png&w=350&h=254'),
+(1, 'Jimmy', 'Butler', 3, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6430.png&w=350&h=254'),
+(1, 'Kevin', 'Durant', 4, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3202.png&w=350&h=254');
 
 insert into rodada values
 (default, '2024-12-31 23:59:59', '2024-01-01 00:00:00');
@@ -158,6 +165,9 @@ SELECT fkUsuario, fkRodada, pontuacao FROM timeUsuario WHERE fkRodada = 1 and fk
 
 SELECT MAX(fkRodada) 
 FROM timeUsuario;
+
+SELECT nomeTime, fkJogador1, fkJogador2, fkJogador3, fkJogador4, fkJogador5, pontuacao, valor FROM timeUsuario JOIN usuario on fkUsuario = idUsuario
+        WHERE fkRodada = 1;
 
 
 -- COMANDOS PARA TESTE --

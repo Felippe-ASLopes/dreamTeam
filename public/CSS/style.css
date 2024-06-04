@@ -139,7 +139,7 @@ video {
 #slogan_button {
     font-size: 3vw;
     margin: 0.5em;
-    color: #550B5B;
+    color: #0077C0;
 }
 
 /* CARDS */
@@ -250,7 +250,7 @@ video {
 
 #div_text > p {
     width: 95%;
-    font-size: 2.5vw;
+    font-size: 2vw;
     word-break: break-word;
 }
 

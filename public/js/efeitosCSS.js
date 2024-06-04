@@ -130,17 +130,17 @@ div_jogador4.addEventListener('mouseout', function() {
 
 // DRAGGING DE ELEMENTOS
 // const dropZone = document.querySelectorAll('.add_jogador')
-const dropZone = document.querySelector('#div_jogador2')
+// const dropZone = document.querySelector('#div_jogador2')
 
-document.addEventListener('dragstart', function(e) {
-    // const teste = e.target.textContent
-    e.target.classList.add('dragging')
-})
+// document.addEventListener('dragstart', function(e) {
+//     // const teste = e.target.textContent
+//     e.target.classList.add('dragging')
+// })
 
-document.addEventListener('dragend', function(e) {
-    e.target.classList.remove('dragging')
-})
+// document.addEventListener('dragend', function(e) {
+//     e.target.classList.remove('dragging')
+// })
 
-dropZone.addEventListener('dragenter', function() {
-    console.log('teste')
-})
+// dropZone.addEventListener('dragenter', function() {
+//     console.log('teste')
+// })

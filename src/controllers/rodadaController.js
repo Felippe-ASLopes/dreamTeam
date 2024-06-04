@@ -22,7 +22,31 @@ function obterEstatistica(req, res) {
         });
 }
 
+function obterEstatisticaDashboard(req, res) {
+    rodadaModel.obterEstatisticaDashboard()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function obterRodadaDashboard(req, res) {
+    rodadaModel.obterRodadaDashboard()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     obterRodada,
-    obterEstatistica
+    obterEstatistica,
+    obterEstatisticaDashboard,
+    obterRodadaDashboard
 };
