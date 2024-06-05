@@ -41,7 +41,7 @@ function atualizarDinheiroUser(idUsuario, comandoUpdate) {
 
 function novaRodada() {
     var instrucaoSql = `INSERT INTO rodada VALUES
-    (DEFAULT, '2024-06-03 23:59:59', '2024-06-04 00:00:00');`;
+    (DEFAULT, '2030-12-31 23:59:59', '2031-01-01 00:00:00');`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

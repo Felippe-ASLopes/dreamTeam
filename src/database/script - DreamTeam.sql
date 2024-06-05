@@ -93,7 +93,11 @@ insert into timeNba (cidade, nomeTimeNba) values
 ('Minnesota', 'Timberwolves'),
 ('Brooklyn', 'Nets'),
 ('Milwaukee', 'Bucks'),
-(null, 'Golden State Warriors');
+(null, 'Golden State Warriors'),
+('Los Angeles', 'Clippers'),
+('Miami', 'Heat'),
+('Denver', 'Nuggets'),
+('Phoenix', 'Suns');
 
 insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco, urlImagem) values
 (1, 'LeBron', 'James', 3, 30.00, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png&w=350&h=254'),
@@ -105,19 +109,20 @@ insert into jogador (fkTime, nomeJogador, sobrenome, fkPosicao, preco, urlImagem
 (3, 'Luka' , 'Dončić', 2, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3945274.png&w=350&h=254'),
 (6, 'Giannis', 'Antetokounmpo', 4, 25, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3032977.png&w=350&h=254'),
 (7, 'Stephen', 'Curry', 1, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254'),
-(1, 'Damian', 'Lillard', 1, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6606.png&w=350&h=254'),
-(1, 'James', 'Harden', 2, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3992.png&w=350&h=254'),
-(1, 'Bam', 'Adebayo', 5, 10, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4066261.png&w=350&h=254'),
-(1, 'Nikola', 'Jokic', 5, 20, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3112335.png&w=350&h=254'),
-(1, 'Jimmy', 'Butler', 3, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6430.png&w=350&h=254'),
-(1, 'Kevin', 'Durant', 4, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3202.png&w=350&h=254');
+(6, 'Damian', 'Lillard', 1, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6606.png&w=350&h=254'),
+(8, 'James', 'Harden', 2, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3992.png&w=350&h=254'),
+(9, 'Bam', 'Adebayo', 5, 10, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4066261.png&w=350&h=254'),
+(10, 'Nikola', 'Jokic', 5, 20, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3112335.png&w=350&h=254'),
+(9, 'Jimmy', 'Butler', 3, 15, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/6430.png&w=350&h=254'),
+(11, 'Kevin', 'Durant', 4, 30, 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3202.png&w=350&h=254');
 
 insert into rodada values
-(default, '2024-12-31 23:59:59', '2024-01-01 00:00:00');
+(default, '2030-12-31 23:59:59', '2031-01-01 00:00:00');
 
 insert into usuario values
-(default, 'Admin', 'a', md5('a'), 500);
+(default, 'Admin', 'admin', md5('admin'), 500);
 
+-- Comandos para teste --
 select * from usuario;
 select * from jogador;
 select * from timeNBA;
@@ -125,9 +130,7 @@ select * from timeUsuario;
 select * from rodada;
 select * from estatistica;
 
-update usuario set senha = md5('teste2') where idUsuario = 3;
-
-select idJogador, nomeJogador, sobrenome, sigla, preco, cidade, nomeTimeNba from jogador
+select idJogador, concat(nomeJogador, ' ', sobrenome) as 'Nome do Jogador', sigla as Posicao, preco, cidade, nomeTimeNba from jogador
 join timeNba on fkTime = idTime
 join posicao on fkPosicao = idPosicao order by idJogador;
 
@@ -148,29 +151,13 @@ join jogador as j4 on fkJogador4 = j4.idJogador
 join jogador as j5 on fkJogador5 = j5.idJogador
 WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario);
 
-SELECT * FROM timeUsuario
-WHERE fkRodada = (SELECT MAX(fkRodada) FROM timeUsuario);
-
-SELECT fkJogador, ROUND(AVG(pontuacaoJogador), 2) AS mediaPontuacao
-FROM estatistica
-GROUP BY fkJogador;
-
-SELECT fkRodada, concat(nomeJogador, ' ', sobrenome) as 'Nome jogador', ponto, assistencia, rebote, bloqueio, roubo, turnOver, falta FROM estatistica
+SELECT fkRodada, concat(nomeJogador, ' ', sobrenome) as 'Nome jogador', ponto, assistencia, rebote, bloqueio, roubo, turnOver, falta, pontuacaoJogador FROM estatistica
 join jogador on fkJogador = idJogador
 WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
 
-SELECT * FROM estatistica WHERE fkRodada = (SELECT MAX(fkRodada) FROM estatistica);
+SELECT idJogador, concat(nomeJogador, ' ', sobrenome), ROUND(AVG(pontuacaoJogador), 2) AS mediaPontuacao
+FROM estatistica
+JOIN jogador ON fkJogador = idJogador
+GROUP BY fkJogador;
 
-SELECT fkUsuario, fkRodada, pontuacao FROM timeUsuario WHERE fkRodada = 1 and fkUsuario = 1;
-
-SELECT MAX(fkRodada) 
-FROM timeUsuario;
-
-SELECT nomeTime, fkJogador1, fkJogador2, fkJogador3, fkJogador4, fkJogador5, pontuacao, valor FROM timeUsuario JOIN usuario on fkUsuario = idUsuario
-        WHERE fkRodada = 1;
-
-
--- COMANDOS PARA TESTE --
--- truncate table estatistica;
--- update jogador set preco = preco - 1 where idJogador = 1; --
--- drop database dreamteam; --
+-- DROP DATABASE dreamTeam; --

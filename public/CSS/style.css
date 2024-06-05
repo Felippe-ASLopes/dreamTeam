@@ -259,7 +259,7 @@ video {
     height: 100%;
 }
 
-footer {
+/* footer {
     width: 99.2vw;
     height: 15vh;
     display: flex;
@@ -270,7 +270,7 @@ footer {
 
 footer > img {
     height: 100%;
-}
+} */
 
 #container_footer {
     width: 40vw;
